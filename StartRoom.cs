@@ -126,12 +126,12 @@ namespace EscapeBuilding
                 firstRoom[playerVer, playerHori] = "● ";
 
                 //플레이어 이동 흔적 복원
-                if (playerVer >= 1 && playerVer < 13 && playerHori > 0 && playerHori < 13)
+                if (playerVer >= 1 && playerVer < 14 && playerHori > 0 && playerHori < 14)
                 {
                     firstRoom[playerVer, playerHori] = ". ";
                 }
 
-                if (playerVer >= 9 && playerVer < 13 && playerHori >= 5 && playerHori < 10)
+                if (playerVer >= 9 && playerVer < 14 && playerHori >= 5 && playerHori < 10)
                 {
                     firstRoom[playerVer, playerHori] = "▣ ";
                 }
@@ -139,7 +139,7 @@ namespace EscapeBuilding
                 switch (inputKey.Key)
                 {
                     case ConsoleKey.W:
-                        if (playerVer > 0)
+                        if (playerVer > 1)
                         {
                             playerVer--;
                         }
@@ -153,14 +153,14 @@ namespace EscapeBuilding
                         break;
 
                     case ConsoleKey.A:
-                        if (playerHori > 0)
+                        if (playerHori > 1)
                         {
                             playerHori--;
                         }
                         break;
 
                     case ConsoleKey.D:
-                        if (playerHori < 13)
+                        if (playerHori < 14)
                         {
                             playerHori++;
                         }
@@ -181,13 +181,13 @@ namespace EscapeBuilding
 
         public void messagePrint()
         {
-
+            //아이템: 종이조각
             if (playerVer == 5 && playerHori == 2)
             {
                 Console.SetCursorPosition(mapLeft + 50, mapTop + 25);
                 Console.WriteLine("짤막한 글이 적힌 종이조각이 있다.");
                 Console.SetCursorPosition(mapLeft + 55, mapTop + 26);
-                Console.WriteLine("<상호작용: 'K' 누르기>");
+                Console.WriteLine("<상호작용: 'Y' 누르기>");
 
                 while (true)
                 {
@@ -195,26 +195,18 @@ namespace EscapeBuilding
 
                     switch (inputKey.Key)
                     {
-                        case ConsoleKey.K:
+                        case ConsoleKey.Y:
 
                             Console.Clear();
-                            Console.SetCursorPosition(mapLeft + 45, mapTop + 10);
+                            Console.SetCursorPosition(mapLeft + 40, mapTop + 15);
                             Console.Write("이곳에 얼마나 오래 갇혀 있었는지 모르겠다. 끝이 존재하지 않는다.");
-                            Console.SetCursorPosition(mapLeft + 45, mapTop + 11);
+                            Console.SetCursorPosition(mapLeft + 40, mapTop + 16);
                             Console.Write("난 이제 지쳐 아무것도 하지 못하지만 이 글을 읽은 당신만은 탈출했으면 좋겠다. - 1029");
-                            Console.SetCursorPosition(mapLeft + 45, mapTop + 12);
-                            Console.Write("맵으로 돌아가기: 'ESC'버튼");
+                            Console.SetCursorPosition(mapLeft + 50, mapTop + 19);
+                            Console.Write("<이동버튼을 눌러 맵으로 돌아가기>");
 
                             break;
 
-                        case ConsoleKey.Escape:
-
-                            playerVer = 3;
-                            playerHori = 5;
-
-                            MovingPlayer();
-
-                            break;
 
                         case ConsoleKey.W:
 
@@ -250,68 +242,43 @@ namespace EscapeBuilding
                             break;
 
                     }
-
-
                 }
             }
 
-            if (playerVer >= 9 && playerVer < 14 && playerHori >= 15 && playerHori < 10)
+            //아이템: 창문
+            if (playerVer >= 9 && playerVer < 14 && playerHori >= 5 && playerHori < 10)
             {
                 Console.SetCursorPosition(mapLeft + 50, mapTop + 25);
-                Console.WriteLine("창문의 철창 사이로 달빛이 들어온다.");
-                Console.SetCursorPosition(mapLeft + 55, mapTop + 26);
+                Console.WriteLine("철창 사이로 달빛이 들어온다.");
+                Console.SetCursorPosition(mapLeft + 50, mapTop + 26);
                 Console.WriteLine("창문으로 탈출하는 것은 불가능해 보인다.");
 
-                while (true)
+            }
+
+            else
+            {
+                Console.Clear();
+                MovingPlayer();
+            }
+       
+
+            if(playerVer==1 && playerHori>=7 && playerHori<10)
+            {
+                Console.SetCursorPosition(mapLeft + 50, mapTop + 25);
+                Console.WriteLine("문이 열려있다. 복도로 나가볼까?");
+                Console.SetCursorPosition(mapLeft + 55, mapTop + 26);
+                Console.WriteLine("<상호작용: 'Y' 누르기>");
+
+                ConsoleKeyInfo inputKey = Console.ReadKey();
+                if(inputKey.Key == ConsoleKey.Y)
                 {
-                    ConsoleKeyInfo inputKey = Console.ReadKey();
+                    //MainConsole();
+                }
 
-                    switch (inputKey.Key)
-                    {
-
-                        case ConsoleKey.Escape:
-
-                            playerVer = 3;
-                            playerHori = 5;
-
-                            MovingPlayer();
-
-                            break;
-
-                        case ConsoleKey.W:
-
-                            playerVer--;
-                            Console.Clear();
-                            MovingPlayer();
-
-                            break;
-
-                        case ConsoleKey.S:
-
-                            playerVer++;
-                            Console.Clear();
-                            MovingPlayer();
-
-                            break;
-
-
-                        case ConsoleKey.A:
-
-                            playerHori--;
-                            Console.Clear();
-                            MovingPlayer();
-
-                            break;
-
-                        case ConsoleKey.D:
-
-                            playerHori++;
-                            Console.Clear();
-                            MovingPlayer();
-
-                            break;
-
-                    }
+                else
+                {
+                    Console.Clear();
+                    MovingPlayer();
                 }
             }
         }
