@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Battery.cs" />
     <Compile Include="FinishRoom.cs" />
     <Compile Include="MainConsole.cs" />
     <Compile Include="Program.cs" />
