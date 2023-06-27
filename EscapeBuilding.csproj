@@ -44,10 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Battery.cs" />
+    <Compile Include="DrawWindow.cs" />
     <Compile Include="FinishRoom.cs" />
     <Compile Include="MainConsole.cs" />
+    <Compile Include="PlayerChoice.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomBattle.cs" />
     <Compile Include="StartRoom.cs" />
   </ItemGroup>
   <ItemGroup>

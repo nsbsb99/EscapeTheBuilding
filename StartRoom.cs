@@ -193,7 +193,7 @@ namespace EscapeBuilding
                 Console.SetCursorPosition(mapLeft + 47, mapTop + 25);
                 Console.WriteLine("짤막한 글이 적힌 종이조각과 손전등이 놓여 있다.");
                 Console.SetCursorPosition(mapLeft + 55, mapTop + 26);
-                Console.WriteLine("<아이템 얻기: 'Y' 누르기>");
+                Console.WriteLine("<아이템 얻기: '1'>");
                 getItem++;
 
                 while (true)
@@ -202,7 +202,7 @@ namespace EscapeBuilding
 
                     switch (inputKey.Key)
                     {
-                        case ConsoleKey.Y:
+                        case ConsoleKey.D1:
 
                             Console.Clear();
                             Console.SetCursorPosition(mapLeft + 40, mapTop + 15);
@@ -216,12 +216,44 @@ namespace EscapeBuilding
                             if (escapeKey.Key == ConsoleKey.Escape)
                             {
                                 Console.Clear();
-                                playerHori++;                              
+                                playerHori++;
                                 MovingPlayer();
                             }
-                           
+
                             break;
-                    
+
+                        case ConsoleKey.W:
+
+                            Console.Clear();
+                            playerVer--;
+                            MovingPlayer();
+
+
+                            break;
+
+                        case ConsoleKey.S:
+
+                            Console.Clear();
+                            playerVer++;
+                            MovingPlayer();
+
+                            break;
+
+                        case ConsoleKey.A:
+
+                            Console.Clear();
+                            playerHori--;
+                            MovingPlayer();
+
+                            break;
+
+                        case ConsoleKey.D:
+
+                            Console.Clear();
+                            playerHori++;
+                            MovingPlayer();
+
+                            break;
                     }
                 }
             }
@@ -242,18 +274,19 @@ namespace EscapeBuilding
                 Console.SetCursorPosition(mapLeft + 50, mapTop + 25);
                 Console.WriteLine("문이 열려있다. 복도로 나가볼까?");
                 Console.SetCursorPosition(mapLeft + 55, mapTop + 26);
-                Console.WriteLine("<상호작용: 'Y' 누르기>");
+                Console.WriteLine("<상호작용: '1'>");
 
                 ConsoleKeyInfo inputKey = Console.ReadKey();
 
-                if (inputKey.Key == ConsoleKey.Y && getItem >= 1)
+                //문제발생
+                if (inputKey.Key == ConsoleKey.D1 && getItem >= 1)
                 {
                     Console.Clear();
                     MainConsole mainConsole = new MainConsole();
-                    mainConsole.DrawConsole();
+                    mainConsole.FirstPrint();
                 }
 
-                else if (inputKey.Key == ConsoleKey.Y && getItem < 1)
+                else if (inputKey.Key == ConsoleKey.D1 && getItem < 1)
                 {
                     Console.Clear();
                     DrawFirstRoom();
