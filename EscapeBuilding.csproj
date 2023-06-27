@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomBattle.cs" />
     <Compile Include="StartRoom.cs" />
+    <Compile Include="StatusWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -10,15 +10,26 @@ namespace EscapeBuilding
     {
         static void Main(string[] args)
         {
-            StartRoom startRoom = new StartRoom();
-            startRoom.FirstRoom();
-            startRoom.DrawFirstRoom();
-            startRoom.MovingPlayer();
+            //StartRoom startRoom = new StartRoom();
+            //startRoom.FirstRoom();
+            //startRoom.DrawFirstRoom();
+            //startRoom.MovingPlayer();
 
-            MainConsole mainConsole = new MainConsole();
-            mainConsole.FirstPrint();
+            //MainConsole mainConsole = new MainConsole();
+            //mainConsole.FirstPrint();
 
+            RandomBattle randomBattle = new RandomBattle();
+            randomBattle.WhatMonster();
+            randomBattle.FightMonster();
 
+            //DrawWindow drawWindow = new DrawWindow();
+            //Battery battery = new Battery();
+            //StatusWindow statusWindow = new StatusWindow();
+
+            //Console.ReadLine();
+            //drawWindow.DrawMap();
+            //battery.DrawBattery();
+            //statusWindow.StatusMap();
 
         }
 
@@ -29,6 +40,5 @@ namespace EscapeBuilding
 }
 
 //<수정사항>
-//손전등과 종이조각을 얻고 나서 아이템은 사라져야 한다. 
-//MainConsole에서 첫 텍스트콘솔 출력에서 문제 생김...
+//if문의 사용에서 stackoverflow 문제가 생기는 것 같다.
 

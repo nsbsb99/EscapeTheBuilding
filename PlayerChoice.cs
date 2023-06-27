@@ -27,7 +27,7 @@ namespace EscapeBuilding
         int playerMoved;
 
         DrawWindow drawMap = new DrawWindow();
-        //RandomBattle randomBattle = new RandomBattle();
+        RandomBattle randomBattle = new RandomBattle();
         Battery battery = new Battery();
 
         #endregion
@@ -51,10 +51,11 @@ namespace EscapeBuilding
             Console.Write("<진행: 'Enter'>");
 
             Console.ReadLine();
-
+            //밑 세개는 세트
             Console.Clear();
             battery.DrawBattery();
             drawMap.DrawMap();
+
             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
             Console.Write("무언가 이상하다...");
             Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
@@ -89,6 +90,12 @@ namespace EscapeBuilding
                     Console.Write("뒤를 돌아봤지만 아무 것도 없다...");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
                     Console.Write("착각이었나?");
+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<계속 진행하기: 'Enter'>");
+
+                    Console.ReadLine();
+
                     playerMoved++;
                     Situation();
 
@@ -99,7 +106,11 @@ namespace EscapeBuilding
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write("형체를 알 수 없는 것이 뛰어든다!");
 
-                    RandomBattle randomBattle = new RandomBattle();
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<전투 진행하기: 'Enter'>");
+
+                    Console.ReadLine();
+
                     //randomBattle.FightMonster();
                     playerMoved++;
                     Situation();
@@ -143,11 +154,14 @@ namespace EscapeBuilding
         {
             int choiceSituation = rand.Next(4); // 일단 이것만 만들어보기.
 
+            Console.Clear();
+            battery.DrawBattery();
+            drawMap.DrawMap();
+
             while (playerMoved < 4) // 임시 값.
             {
                 if (choiceSituation == 0)
                 {
-                    drawMap.DrawMap();
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write("걷다보니 희미한 녹색 불빛이 보인다...");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
@@ -183,7 +197,7 @@ namespace EscapeBuilding
                     Console.Write("또 다른 무언가다.");
                     Thread.Sleep(3000);
                     Console.Clear();
-                    //randomBattle.WhatMonster();
+                    //randomBattle.FightMonster();
                     playerMoved++;
                 }
 
