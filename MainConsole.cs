@@ -42,7 +42,7 @@ namespace EscapeBuilding
             if (firstChoice.Key == ConsoleKey.D1)
             {
                 PlayerChoice playerChoice = new PlayerChoice();
-                playerChoice.ChoicePaper(); //이후 상황 진행 창으로 이동
+                playerChoice.ChoicePaper(); //타 cs 메서드 호출
                 return;
             }
 

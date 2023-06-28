@@ -8,8 +8,11 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace EscapeBuilding
 {
-    public class RandomBattle
+    public class RandomBattle : PlayerChoice
     {
+
+        #region
+
         List<string> monsterName = new List<string>();
         List<int> monsterHP = new List<int>();
         List<int> monsterAttack = new List<int>();
@@ -20,19 +23,16 @@ namespace EscapeBuilding
         //맵 가운데 위치 잡기
         int mapLeft;
         int mapTop = 5;
-        //플레이어의 스텟
-        int playerHP = 500;
-        int playerAttack = 30;
-        int playerMP = 1000; //플레이어의 정신력. 정신력이 0이 되면 배터리가 더 빠르게 닳는다.
-
-        private Random rand;
-        int monsterRand;
-
+      
         //PlayerChoice playerChoice = new PlayerChoice(); //졸라 중대한 문제다 
         DrawWindow drawMap = new DrawWindow();
         Battery battery = new Battery();
         StatusWindow statusWindow = new StatusWindow();
         MainConsole mainConsole = new MainConsole();
+
+        int monsterRand;
+
+        #endregion
 
 
         public void WhatMonster() //나중에 추가 
@@ -53,20 +53,19 @@ namespace EscapeBuilding
             monsterAttack.Add(50); // 인간거미
             monsterAttack.Add(45); //붉은 촉수 
 
-
+            FightMonster();
         }
 
         public void FightMonster()
         {
             PlayerChoice playerChoice = new PlayerChoice();
+            Random rand = new Random();
 
             monsterRand = rand.Next(3); //0,1,2 랜덤출력
 
             Console.Clear();
-            Console.ReadLine(); // 컴파일 테스트
             drawMap.DrawMap();
             PlayerStatus();
-
 
             //몬스터 이름 출력
             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
@@ -146,7 +145,7 @@ namespace EscapeBuilding
 
                             monsterHP[monsterRand] -= playerAttack;
 
-                            Thread.Sleep(3000);
+                            Thread.Sleep(2000);
 
                             MonsterStatus();
                             PlayerStatus();
@@ -163,6 +162,8 @@ namespace EscapeBuilding
                             Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
                             Console.Write("방어시도!");
 
+                            Thread.Sleep(2500);
+
                             Console.Clear();
                             battery.DrawBattery();
                             drawMap.DrawMap();
@@ -170,9 +171,12 @@ namespace EscapeBuilding
                             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                             Console.Write($"{monsterName[monsterRand]}에게 {monsterAttack[monsterRand]}의 피해를 입었다.");
 
-                            playerHP -= monsterAttack[monsterRand];
+                            playerHP = playerHP - monsterAttack[monsterRand] + playerSheild;
 
-                            Thread.Sleep(3000);
+                            Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                            Console.Write($"{playerSheild} 방어에 성공!");
+
+                            Thread.Sleep(2000);
 
                             MonsterStatus();
                             PlayerStatus();
@@ -180,8 +184,7 @@ namespace EscapeBuilding
                             break;
 
                     }
-                }
-                
+                }               
             }
         }
 

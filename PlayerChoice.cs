@@ -18,8 +18,9 @@ namespace EscapeBuilding
         int mapLeft;
         int mapTop = 5;
         //플레이어의 스텟
-        int playerHP = 100;
-        int playerMP = 100; // 플레이어의 정신력
+        protected int playerHP = 300;
+        protected int playerAttack = 1000;
+        protected int playerSheild = 30;
 
         int playerMoved;
 
@@ -33,16 +34,16 @@ namespace EscapeBuilding
             Random rand = new Random();
 
             mapLeft = (consoleWidth - mapSize) / 3 + 3;
-            //배터리와 스테이터스창 출력
-            statusWindow.StatusMap();
             //출력창 두 개 출력
             drawWindow.DrawMap();
+            //배터리와 스테이터스창 출력
+            statusWindow.StatusMap();
 
             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
             Console.Write("손전등을 켜니 앞이 보이기 시작한다.");
             Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
-            Console.Write("하지만 손전등 배터리에 한계가 있는 모양이다.");
-            Console.SetCursorPosition(mapLeft + 1, mapTop + 4);
+            Console.Write("배터리로 작동하는 제품같다.");
+            Console.SetCursorPosition(mapLeft + 1, mapTop + 5);
             Console.Write("일단 앞으로 가보자.");
             Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
             Console.Write("<진행: 'Enter'>");
@@ -53,7 +54,9 @@ namespace EscapeBuilding
             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
             Console.Write("무언가 이상하다...                 ");
             Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
-            Console.Write("누군가 쫓아오고 있다...?           ");
+            Console.Write("누군가 쫓아오고 있다...?                   ");
+            Console.SetCursorPosition(mapLeft + 1, mapTop + 5);
+            Console.Write("                          ");
 
             Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
             Console.Write("<뒤를 돌아본다: '1'>");
@@ -105,11 +108,10 @@ namespace EscapeBuilding
 
                     Console.ReadLine();
 
-                    randomBattle.FightMonster();
+                    randomBattle.WhatMonster();
                 }
             }
 
-            //해당 부분에서 중대 문제 발생 
             else if (secondChoice.Key == ConsoleKey.D2)
             {
                 int run = rand.Next(10);
@@ -124,6 +126,12 @@ namespace EscapeBuilding
                     Console.Write("무사히 도망친 것 같다...");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
                     Console.Write("뭐였지?");
+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<계속 진행하기: 'Enter'>");
+
+                    Console.ReadLine();
+
                     playerMoved++;
                     Situation();
                 }
@@ -134,16 +142,19 @@ namespace EscapeBuilding
                     Console.Write("도망치던 와중에 옷깃을 잡혀버렸다...!");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
                     Console.Write("무언가 덤벼든다!");
-                    //randomBattle.FightMonster();
-                    playerMoved++;
-                    Situation();
+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<전투 진행하기: 'Enter'>");
+
+                    Console.ReadLine();
+
+                    randomBattle.WhatMonster();
                 }
             }
-        } //여기까지 체크 완료
+        } 
 
         public void Situation() //첫번째 이후의 선택은 랜덤 
         {
-
             DrawWindow drawWindow = new DrawWindow();
             StatusWindow statusWindow = new StatusWindow();
             RandomBattle randomBattle = new RandomBattle();
@@ -166,19 +177,30 @@ namespace EscapeBuilding
                     Console.Write("걷다보니 희미한 녹색 불빛이 보인다...");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
                     Console.Write("저쪽으로 가보자.");
-                    Thread.Sleep(3000);
-                    Console.Clear();
+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<불빛 쪽으로 가보기: 'Enter'>");
+
+                    Console.ReadLine();
+
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("가득 차 있는 배터리다!");
+                    Console.Write("가득 차 있는 배터리다!                  ");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
-                    Console.Write("갈아끼우자.");
+                    Console.Write("갈아끼우자.             ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("                                  ");
                     //배터리 100퍼센트로.
-                    Thread.Sleep(1000);
-                    Console.Clear();
-                    Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("손전등이 더 환히 빛난다.");
                     Thread.Sleep(3000);
-                    Console.Clear();
+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                    Console.Write("손전등이 더 환히 빛난다.                     ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                    Console.Write("                           ");
+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<계속 진행하기: 'Enter'>");
+
+                    Console.ReadLine();
                 }
 
                 if (choiceSituation == 1)
@@ -187,15 +209,20 @@ namespace EscapeBuilding
                     Console.Write("하염없이 걷고 또 걸었다.");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
                     Console.Write("이게 무슨 소리지...?");
-                    Thread.Sleep(3000);
-                    Console.Clear();
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<소리의 정체 알아보기: 'Enter'>");
+
+                    Console.ReadLine();
+
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("안돼...");
+                    Console.Write("안돼...                       ");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
-                    Console.Write("또 다른 무언가다.");
+                    Console.Write("또 다른 무언가다.                   ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("                                   ");
                     Thread.Sleep(3000);
                     Console.Clear();
-                    randomBattle.FightMonster();
+                    randomBattle.WhatMonster();
                 }
 
                 if (choiceSituation == 2)
@@ -204,27 +231,42 @@ namespace EscapeBuilding
                     Console.Write("이곳은 무언가 온기가 느껴진다.");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
                     Console.Write("저 방...");
-                    Thread.Sleep(3000);
-                    Console.Clear();
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<방으로 진입하기: 'Enter'>");
+
+                    Console.ReadLine();
+
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("방 안에 통조림캔이다!");
+                    Console.Write("방 안에 통조림캔이다!               ");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
                     Console.Write("메모를 남긴 그 사람인가...?");
-                    //플레이어 HP+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("                              ");
+                    playerHP += 30;
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("체력이 회복되었다.");
-                    Thread.Sleep(3000);
-                    Console.Clear();
+                    Console.Write("체력이 회복되었다.                    ");
+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<계속 진행하기: 'Enter'>");
+
+                    Console.ReadLine();
                 }
 
                 if (choiceSituation == 3)
                 {
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("힘들다... 아까부터 쫓아오는 저놈");
+                    Console.Write("정체를 알 수 없는 무언가 쫓아와 한참을 뛰었다.");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                    Console.Write("힘들다... 아까부터 쫓아오는 저것...");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 4);
                     Console.Write("도저히 멈출 기색이 없다.");
-                    Thread.Sleep(1000);
+
+                    Thread.Sleep(3000);
+
                     Console.Clear();
+                    drawWindow.DrawMap();
+                    statusWindow.StatusMap();
+
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write("맞서 싸울까, 계속 도망칠까?");
 
@@ -243,10 +285,12 @@ namespace EscapeBuilding
                             drawWindow.DrawMap();
                             statusWindow.StatusMap();
                             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                            Console.Write("저놈은 반드시 끝장낸다");
-                            randomBattle.FightMonster();
-                            playerMoved++;
+                            Console.Write("싸워야만 한다!");
 
+                            Thread.Sleep(3000);
+
+                            randomBattle.WhatMonster();
+              
                             break;
 
                         case ConsoleKey.D2:
@@ -264,6 +308,18 @@ namespace EscapeBuilding
                     }
                 }
             }
+
+            Thread.Sleep(3000);
+            Console.Clear();
+
+            Console.SetCursorPosition(mapLeft+24, mapTop + 10);
+            Console.WriteLine("저 앞에 새로운 복도가 보인다...!");
+
+            Thread.Sleep(3000);
+            Console.Clear();
+
+            Console.SetCursorPosition(mapLeft+30, mapTop + 10);
+            Console.WriteLine("분명 탈출구야!");
 
             Thread.Sleep(3000);
             Console.Clear();

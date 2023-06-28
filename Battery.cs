@@ -8,20 +8,20 @@ namespace EscapeBuilding
 
         public void DrawBattery()
         {
-            Console.SetCursorPosition(110, 5);
+            Console.SetCursorPosition(110, 15);
             Console.WriteLine("Battery");
 
 
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Green;
 
-            Console.SetCursorPosition(112, 7);
+            Console.SetCursorPosition(112, 17);
             Console.WriteLine("⁜⁜⁜");
-            Console.SetCursorPosition(112, 8);
+            Console.SetCursorPosition(112, 18);
             Console.WriteLine("⁜⁜⁜");
-            Console.SetCursorPosition(112, 9);
+            Console.SetCursorPosition(112, 19);
             Console.WriteLine("⁜⁜⁜");
-            Console.SetCursorPosition(112, 10);
+            Console.SetCursorPosition(112, 20);
             Console.WriteLine("⁜⁜⁜");
 
             Console.ResetColor();

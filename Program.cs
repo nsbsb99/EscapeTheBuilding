@@ -11,51 +11,22 @@ namespace EscapeBuilding
         
         static void Main(string[] args)
         {
-
-
-            //test Test = new test();
-            //Test.HateThis();
-
-
-
             //StartRoom startroom = new StartRoom();
             //startroom.FirstRoom();
             //startroom.DrawFirstRoom();
             //startroom.MovingPlayer();
 
-            //MainConsole mainConsole = new MainConsole();
-            //mainConsole.FirstPrint();
+            Console.ReadLine();
+            RandomBattle randomBattle = new RandomBattle();
+            randomBattle.WhatMonster();
+            randomBattle.FightMonster();
 
-            //PlayerChoice playerChoice = new PlayerChoice();
-            //playerChoice.ChoicePaper();
-
-            //RandomBattle randomBattle = new RandomBattle();
-            //randomBattle.WhatMonster();
-            //randomBattle.FightMonster();
-
-            //DrawWindow drawWindow = new DrawWindow();
-            //Battery battery = new Battery();
-            //StatusWindow statusWindow = new StatusWindow();
-
-            //Console.ReadLine();
-            //drawWindow.DrawMap();
-            //battery.DrawBattery();
-            //statusWindow.StatusMap();
-
-            FinishRoom finishRoom = new FinishRoom();
-            finishRoom.LastRoom();
-            finishRoom.DrawLastRoom();
-            finishRoom.MovingPlayer();
+            //랜덤배틀에서 시추에이션을 실행할 때 글이 밀린다. 
+            
 
 
         }
-
-
-
-
     }
 }
 
-//<수정사항>
-//if문의 사용에서 stackoverflow 문제가 생기는 것 같다.
 

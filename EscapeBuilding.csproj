@@ -53,6 +53,8 @@
     <Compile Include="RandomBattle.cs" />
     <Compile Include="StartRoom.cs" />
     <Compile Include="StatusWindow.cs" />
+    <Compile Include="Test.cs" />
+    <Compile Include="Title.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

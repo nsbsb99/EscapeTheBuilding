@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace EscapeBuilding
 {
-    public class StatusWindow : Battery
+    public class StatusWindow : PlayerChoice
     {
+        #region
+
         //맵 사이즈 구하기
         int mapSize = 30;
         int consoleWidth = 120;
@@ -15,21 +17,52 @@ namespace EscapeBuilding
         int mapLeft;
         int mapTop = 5;
 
+        #endregion
+
         public void StatusMap()
         {
-            DrawBattery();
+            
+            Battery battery = new Battery();
+
+            battery.DrawBattery();
 
             mapLeft = (consoleWidth - mapSize) / 3 + 3;
 
             Console.SetCursorPosition(108, 23);
             Console.Write("┌─────────────────────────────┐");
+
             for (int drawLine = 1; drawLine < 6; drawLine++)
             {
-                Console.SetCursorPosition(108, 23 + drawLine);
-                Console.Write("│                             │ ");
+                if (drawLine == 1)
+                {
+                    Console.SetCursorPosition(108, 23 + drawLine);
+                    Console.Write($"│체력: {playerHP}                    │");
+                }
+
+                else if(drawLine == 2)
+                {
+                    Console.SetCursorPosition(108, 23 + drawLine);
+                    Console.Write($"│공격력: {playerAttack}                   │");
+
+                }
+
+                else if (drawLine == 3)
+                {
+                    Console.SetCursorPosition(108, 23 + drawLine);
+                    Console.Write($"│방어력: {playerSheild}                   │");
+
+                }
+
+                else
+                {
+                    Console.SetCursorPosition(108, 23 + drawLine);
+                    Console.Write("│                             │");
+                }
             }
             Console.SetCursorPosition(108, 29);
             Console.Write("└─────────────────────────────┘");
+
+            
         }
     }
 }
