@@ -278,7 +278,7 @@ namespace EscapeBuilding
 
                 ConsoleKeyInfo inputKey = Console.ReadKey();
 
-                //문제발생
+         
                 if (inputKey.Key == ConsoleKey.D1 && getItem >= 1)
                 {
                     Console.Clear();

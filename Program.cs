@@ -18,9 +18,14 @@ namespace EscapeBuilding
             //MainConsole mainConsole = new MainConsole();
             //mainConsole.FirstPrint();
 
-            RandomBattle randomBattle = new RandomBattle();
-            randomBattle.WhatMonster();
-            randomBattle.FightMonster();
+            //여기까지 확인완료
+
+            PlayerChoice playerChoice = new PlayerChoice();
+            playerChoice.ChoicePaper();
+
+            //RandomBattle randomBattle = new RandomBattle();
+            //randomBattle.WhatMonster();
+            //randomBattle.FightMonster();
 
             //DrawWindow drawWindow = new DrawWindow();
             //Battery battery = new Battery();
