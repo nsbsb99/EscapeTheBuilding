@@ -8,20 +8,26 @@ namespace EscapeBuilding
 {   
     public class Program
     {
+        
         static void Main(string[] args)
         {
-            //StartRoom startRoom = new StartRoom();
-            //startRoom.FirstRoom();
-            //startRoom.DrawFirstRoom();
-            //startRoom.MovingPlayer();
+
+
+            //test Test = new test();
+            //Test.HateThis();
+
+
+
+            //StartRoom startroom = new StartRoom();
+            //startroom.FirstRoom();
+            //startroom.DrawFirstRoom();
+            //startroom.MovingPlayer();
 
             //MainConsole mainConsole = new MainConsole();
             //mainConsole.FirstPrint();
 
-            //여기까지 확인완료
-
-            PlayerChoice playerChoice = new PlayerChoice();
-            playerChoice.ChoicePaper();
+            //PlayerChoice playerChoice = new PlayerChoice();
+            //playerChoice.ChoicePaper();
 
             //RandomBattle randomBattle = new RandomBattle();
             //randomBattle.WhatMonster();
@@ -35,6 +41,12 @@ namespace EscapeBuilding
             //drawWindow.DrawMap();
             //battery.DrawBattery();
             //statusWindow.StatusMap();
+
+            FinishRoom finishRoom = new FinishRoom();
+            finishRoom.LastRoom();
+            finishRoom.DrawLastRoom();
+            finishRoom.MovingPlayer();
+
 
         }
 

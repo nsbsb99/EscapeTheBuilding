@@ -9,31 +9,28 @@ namespace EscapeBuilding
 {
     public class PlayerChoice
     {
-
         #region
 
         //맵 사이즈 구하기
         int mapSize = 30;
-        int consoleWidth = Console.WindowWidth;
+        int consoleWidth = 120;
         //맵 가운데 위치 잡기
         int mapLeft;
         int mapTop = 5;
         //플레이어의 스텟
         int playerHP = 100;
         int playerMP = 100; // 플레이어의 정신력
-        //랜덤 확률
-        Random rand = new Random();
 
         int playerMoved;
-
-        DrawWindow drawWindow = new DrawWindow();
-        RandomBattle randomBattle = new RandomBattle();
-        StatusWindow statusWindow = new StatusWindow();
 
         #endregion
 
         public void ChoicePaper() //복도에서의 첫번째 상황은 고정 
         {
+            DrawWindow drawWindow = new DrawWindow();
+            StatusWindow statusWindow = new StatusWindow();
+            RandomBattle randomBattle = new RandomBattle();
+            Random rand = new Random();
 
             mapLeft = (consoleWidth - mapSize) / 3 + 3;
             //배터리와 스테이터스창 출력
@@ -94,7 +91,7 @@ namespace EscapeBuilding
                     Console.ReadLine();
 
                     playerMoved++;
-                    //Situation();
+                    Situation();
 
                 }
 
@@ -108,10 +105,7 @@ namespace EscapeBuilding
 
                     Console.ReadLine();
 
-                    //randomBattle.FightMonster();
-                    playerMoved++;
-                    //Situation();
-
+                    randomBattle.FightMonster();
                 }
             }
 
@@ -131,7 +125,7 @@ namespace EscapeBuilding
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
                     Console.Write("뭐였지?");
                     playerMoved++;
-                    //Situation();
+                    Situation();
                 }
 
                 else if(run>4 && run <10) //적과 조우
@@ -142,21 +136,29 @@ namespace EscapeBuilding
                     Console.Write("무언가 덤벼든다!");
                     //randomBattle.FightMonster();
                     playerMoved++;
-                    //Situation();
+                    Situation();
                 }
             }
         } //여기까지 체크 완료
 
         public void Situation() //첫번째 이후의 선택은 랜덤 
         {
-           
-            while (playerMoved < 4) // 임시 값.
+
+            DrawWindow drawWindow = new DrawWindow();
+            StatusWindow statusWindow = new StatusWindow();
+            RandomBattle randomBattle = new RandomBattle();
+            FinishRoom finishRoom = new FinishRoom();
+
+            Random rand = new Random();
+
+            while (playerMoved < 4) // 나중에 추가
             {
                 playerMoved++;
                 int choiceSituation = rand.Next(4); // 일단 이것만 만들어보기.
                 Console.Clear();
                 drawWindow.DrawMap();
                 statusWindow.StatusMap();
+
 
                 if (choiceSituation == 0)
                 {
@@ -193,7 +195,7 @@ namespace EscapeBuilding
                     Console.Write("또 다른 무언가다.");
                     Thread.Sleep(3000);
                     Console.Clear();
-                    //randomBattle.FightMonster();
+                    randomBattle.FightMonster();
                 }
 
                 if (choiceSituation == 2)
@@ -242,7 +244,7 @@ namespace EscapeBuilding
                             statusWindow.StatusMap();
                             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                             Console.Write("저놈은 반드시 끝장낸다");
-                            //randomBattle.FightMonster();
+                            randomBattle.FightMonster();
                             playerMoved++;
 
                             break;
@@ -263,7 +265,10 @@ namespace EscapeBuilding
                 }
             }
 
-            Console.WriteLine("우왕 끝!");
+            Thread.Sleep(3000);
+            Console.Clear();
+
+            finishRoom.LastRoom();
         }
     }
 }

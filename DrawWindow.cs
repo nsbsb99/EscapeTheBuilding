@@ -10,7 +10,7 @@ namespace EscapeBuilding
     {
         //맵 사이즈 구하기
         int mapSize = 30;
-        int consoleWidth = Console.WindowWidth;
+        int consoleWidth = 120;
         //맵 가운데 위치 잡기
         int mapLeft;
         int mapTop = 5;

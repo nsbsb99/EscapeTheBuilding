@@ -208,7 +208,11 @@ namespace EscapeBuilding
                             Console.SetCursorPosition(mapLeft + 40, mapTop + 15);
                             Console.Write("이곳에 얼마나 오래 갇혀 있었는지 모르겠다. 끝이 존재하지 않는다.");
                             Console.SetCursorPosition(mapLeft + 40, mapTop + 16);
-                            Console.Write("난 이제 지쳐 모든 것을 포기했지만 이 글을 읽은 당신만은 탈출했으면 좋겠다. - 1029");
+                            Console.Write("난 이제 지쳐 모든 것을 포기했지만 이 글을 읽은 당신만은 탈출했으면 좋겠다.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.SetCursorPosition(mapLeft + 40, mapTop + 17);
+                            Console.ResetColor();
+                            Console.Write("- 1029");
                             Console.SetCursorPosition(mapLeft + 50, mapTop + 19);
                             Console.Write("<'ESC'버튼을 눌러 맵으로 돌아가기>");
 

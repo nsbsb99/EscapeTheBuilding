@@ -16,7 +16,7 @@ namespace EscapeBuilding
 
         //맵 사이즈 구하기
         int mapSize = 30;
-        int consoleWidth = Console.WindowWidth;
+        int consoleWidth = 120;
         //맵 가운데 위치 잡기
         int mapLeft;
         int mapTop = 5;
@@ -25,7 +25,7 @@ namespace EscapeBuilding
         int playerAttack = 30;
         int playerMP = 1000; //플레이어의 정신력. 정신력이 0이 되면 배터리가 더 빠르게 닳는다.
 
-        Random rand = new Random();
+        private Random rand;
         int monsterRand;
 
         //PlayerChoice playerChoice = new PlayerChoice(); //졸라 중대한 문제다 
@@ -35,7 +35,7 @@ namespace EscapeBuilding
         MainConsole mainConsole = new MainConsole();
 
 
-        public void WhatMonster()
+        public void WhatMonster() //나중에 추가 
         {
             Console.Clear();
 
@@ -58,6 +58,8 @@ namespace EscapeBuilding
 
         public void FightMonster()
         {
+            PlayerChoice playerChoice = new PlayerChoice();
+
             monsterRand = rand.Next(3); //0,1,2 랜덤출력
 
             Console.Clear();
@@ -88,7 +90,8 @@ namespace EscapeBuilding
 
             //전투 시작      
             while (true)
-            {
+            {   
+                //종료조건1 체크 (승리)
                 if (monsterHP[monsterRand] <= 0 && playerHP > 0) //아래 두 개의 if 때문에 문제 발생
                 {
                     Console.Clear();
@@ -97,9 +100,11 @@ namespace EscapeBuilding
 
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write($"승리! 계속 출구를 찾자.");
-                    //playerChoice.Situation();
+
+                    playerChoice.Situation();
                 }
 
+                //종료조건2 체크 (패배)
                 else if (playerHP <= 0 && monsterHP[monsterRand] > 0)
                 {
                     Console.Clear();
@@ -116,6 +121,7 @@ namespace EscapeBuilding
                     mainConsole.GameOver();
                 }
 
+                //종료조건에 해당하지 않으면 전투 속행. else문이 1턴 
                 else
                 {
                     ConsoleKeyInfo battleKey = Console.ReadKey();

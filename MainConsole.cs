@@ -10,28 +10,19 @@ namespace EscapeBuilding
 {
     public class MainConsole
     {
-
         #region
-
         //맵 사이즈 구하기
         int mapSize = 30;
-        int consoleWidth = Console.WindowWidth;
+        int consoleWidth = 120;
         //출력할 위치 잡기
         int mapLeft;
         int mapTop = 5;
-      
-        //랜덤 확률
-        Random rand = new Random();
-        int whatRand;
-
-        DrawWindow drawMap = new DrawWindow();
-        PlayerChoice playerChoice = new PlayerChoice();
-
         #endregion
 
 
         public void FirstPrint()
         {
+            DrawWindow drawMap = new DrawWindow();
             drawMap.DrawMap(); //중앙창 출력
 
             mapLeft = (consoleWidth - mapSize) / 3 + 3;
@@ -50,6 +41,7 @@ namespace EscapeBuilding
 
             if (firstChoice.Key == ConsoleKey.D1)
             {
+                PlayerChoice playerChoice = new PlayerChoice();
                 playerChoice.ChoicePaper(); //이후 상황 진행 창으로 이동
                 return;
             }
