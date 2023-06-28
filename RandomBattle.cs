@@ -100,6 +100,8 @@ namespace EscapeBuilding
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write($"승리! 계속 출구를 찾자.");
 
+                    Thread.Sleep(2000);
+
                     playerChoice.Situation();
                 }
 

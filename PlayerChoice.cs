@@ -22,7 +22,9 @@ namespace EscapeBuilding
         protected int playerAttack = 1000;
         protected int playerSheild = 30;
 
-        int playerMoved;
+        protected int playerMoved;
+
+        protected int batteryPercent = 100;
 
         #endregion
 
@@ -33,7 +35,7 @@ namespace EscapeBuilding
             RandomBattle randomBattle = new RandomBattle();
             Random rand = new Random();
 
-            mapLeft = (consoleWidth - mapSize) / 3 + 3;
+            mapLeft = (consoleWidth - mapSize) / 3 + 3; //33
             //출력창 두 개 출력
             drawWindow.DrawMap();
             //배터리와 스테이터스창 출력
@@ -155,17 +157,22 @@ namespace EscapeBuilding
 
         public void Situation() //첫번째 이후의 선택은 랜덤 
         {
+            FinishRoom finishRoom = new FinishRoom();
             DrawWindow drawWindow = new DrawWindow();
             StatusWindow statusWindow = new StatusWindow();
             RandomBattle randomBattle = new RandomBattle();
-            FinishRoom finishRoom = new FinishRoom();
 
             Random rand = new Random();
+
+            //출력 위치 재설정
+            int mapLeft = 33;
+            int mapTop = 5;
 
             while (playerMoved < 4) // 나중에 추가
             {
                 playerMoved++;
                 int choiceSituation = rand.Next(4); // 일단 이것만 만들어보기.
+
                 Console.Clear();
                 drawWindow.DrawMap();
                 statusWindow.StatusMap();
