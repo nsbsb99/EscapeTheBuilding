@@ -15,7 +15,7 @@ namespace EscapeBuilding
         int mapSize = 30;
         int consoleWidth = 120;
         //출력할 위치 잡기
-        int mapLeft;
+        int mapLeft; //33
         int mapTop = 5;
         #endregion
 

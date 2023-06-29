@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace EscapeBuilding
@@ -19,11 +20,14 @@ namespace EscapeBuilding
 
         #endregion
 
+
         public void StatusMap()
         {
-            
+            Console.ReadLine(); //작동 확인용
+
             Battery battery = new Battery();
 
+            battery.StartBatteryTimer();
             battery.DrawBattery();
 
             mapLeft = (consoleWidth - mapSize) / 3 + 3;
@@ -62,7 +66,7 @@ namespace EscapeBuilding
             Console.SetCursorPosition(108, 29);
             Console.Write("└─────────────────────────────┘");
 
-            
+            Console.ReadLine(); //작동 확인용
         }
     }
 }

@@ -19,12 +19,14 @@ namespace EscapeBuilding
         int mapTop = 5;
         //플레이어의 스텟
         protected int playerHP = 300;
-        protected int playerAttack = 1000;
+        protected int playerAttack = 50;
         protected int playerSheild = 30;
 
+        //일정 횟수 채우면 출구로 이동
         protected int playerMoved;
 
-        protected int batteryPercent = 100;
+        //배터리 타이머 작동
+        protected Timer timer;
 
         #endregion
 
@@ -40,6 +42,7 @@ namespace EscapeBuilding
             drawWindow.DrawMap();
             //배터리와 스테이터스창 출력
             statusWindow.StatusMap();
+
 
             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
             Console.Write("손전등을 켜니 앞이 보이기 시작한다.");
