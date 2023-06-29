@@ -23,13 +23,19 @@ namespace EscapeBuilding
 
         public void StatusMap()
         {
-            Console.ReadLine(); //작동 확인용
+            //HolyFlash에서 값 받아오기 용도
+          
+
+            //Console.ReadLine(); //작동 확인용
 
             Battery battery = new Battery();
+            StrongFlash strongFlash = new StrongFlash();
 
             battery.StartBatteryTimer();
             battery.DrawBattery();
+            strongFlash.HolyFlash();
 
+            
             mapLeft = (consoleWidth - mapSize) / 3 + 3;
 
             Console.SetCursorPosition(108, 23);
@@ -66,7 +72,7 @@ namespace EscapeBuilding
             Console.SetCursorPosition(108, 29);
             Console.Write("└─────────────────────────────┘");
 
-            Console.ReadLine(); //작동 확인용
+            //Console.ReadLine(); //작동 확인용
         }
     }
 }

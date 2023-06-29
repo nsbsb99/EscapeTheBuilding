@@ -28,6 +28,8 @@ namespace EscapeBuilding
         //배터리 타이머 작동
         protected Timer timer;
 
+        protected int flashNumber = 3;
+
         #endregion
 
         public void ChoicePaper() //복도에서의 첫번째 상황은 고정 
@@ -42,7 +44,6 @@ namespace EscapeBuilding
             drawWindow.DrawMap();
             //배터리와 스테이터스창 출력
             statusWindow.StatusMap();
-
 
             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
             Console.Write("손전등을 켜니 앞이 보이기 시작한다.");

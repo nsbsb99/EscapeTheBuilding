@@ -135,16 +135,5 @@ namespace EscapeBuilding
                 mainConsole.GameOver();
             }
         }
-        
-        public void HolyFlash() //문제 생기면 클래스 분리
-        {
-
-
-
-
-
-
-
-        }
     }
 }

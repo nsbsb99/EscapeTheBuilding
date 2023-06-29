@@ -14,8 +14,10 @@ namespace EscapeBuilding
         #region
 
         List<string> monsterName = new List<string>();
-        List<int> monsterHP = new List<int>();
+        protected List<int> monsterHP = new List<int>();
         List<int> monsterAttack = new List<int>();
+
+        protected int monsterRand;
 
         //맵 사이즈 구하기
         int mapSize = 30;
@@ -30,7 +32,9 @@ namespace EscapeBuilding
         StatusWindow statusWindow = new StatusWindow();
         MainConsole mainConsole = new MainConsole();
 
-        int monsterRand;
+        //플래시 사용량
+        protected int flashNumber = 3;
+
 
         #endregion
 
@@ -86,6 +90,9 @@ namespace EscapeBuilding
             Console.Write("<공격한다: '1'>");
             Console.SetCursorPosition(mapLeft + 1, mapTop + 20);
             Console.Write("<방어한다: '2'>");
+
+            Console.SetCursorPosition(mapLeft + 1, mapTop + 22);
+            Console.Write("<플래쉬 사용: '3'>");
 
             //전투 시작      
             while (true)
@@ -185,6 +192,46 @@ namespace EscapeBuilding
 
                             break;
 
+                            case ConsoleKey.D3: //플래시 사용
+
+                            StrongFlash strongFlash = new StrongFlash();
+                            strongFlash.HolyFlash();
+
+                            if (flashNumber<0)
+                            {
+                                Console.Clear();
+                                drawMap.DrawMap();
+                                PlayerStatus();
+
+                                Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                                Console.Write("플래시 강출력!");
+
+                                flashNumber--;
+
+                                Thread.Sleep(1500);
+                                monsterHP[monsterRand] -= 0;
+                                Thread.Sleep(1500);
+
+                                Console.Clear();
+                                battery.DrawBattery();
+                                drawMap.DrawMap();
+
+                                Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                                Console.Write($"최대 출력을 끌어내 {monsterName[monsterRand]}를 격퇴했다.");
+                            }
+
+                            else if (flashNumber<=0)
+                            {
+                                Console.Clear();
+                                drawMap.DrawMap();
+                                PlayerStatus();
+
+                                Console.SetCursorPosition(108, 21);
+                                Console.Write("더이상 사용할 수 없음.");
+                            }
+                            
+
+                            break;
                     }
                 }               
             }
