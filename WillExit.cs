@@ -9,6 +9,8 @@ namespace EscapeBuilding
 {
     public class WillExit
     {
+
+        public static int willGetKey = 0;
         public void KeySound()
         {
             Console.Clear();
@@ -29,7 +31,7 @@ namespace EscapeBuilding
             Thread.Sleep(3000);
             Console.Clear();
 
-            Console.SetCursorPosition(mapLeft + 6, mapTop);
+            Console.SetCursorPosition(mapLeft + 8, mapTop);
 
             Console.WriteLine("...?");
 
@@ -49,7 +51,23 @@ namespace EscapeBuilding
             Console.SetCursorPosition(mapLeft + 2, mapTop + 4);
             Console.WriteLine("<복도로 나아가기: 2>");
 
+            ConsoleKeyInfo twoWays = Console.ReadKey();
 
+            switch(twoWays.Key)
+            {
+                case ConsoleKey.D1:
+
+                    willGetKey++;
+
+                    StartRoom startRoom = new StartRoom();
+                    startRoom.FirstRoom();
+                    startRoom.DrawFirstRoom();
+                    startRoom.MovingPlayer();
+
+                    break;
+
+
+            }
 
         }
 

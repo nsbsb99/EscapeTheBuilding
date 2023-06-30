@@ -74,6 +74,11 @@ namespace EscapeBuilding
 
             firstRoom[5, 2] = "© ";
 
+            if(WillExit.willGetKey>0)
+            {
+                firstRoom[11, 7] = "⁜ ";
+            }
+
         }
 
         public void DrawFirstRoom()
@@ -92,7 +97,6 @@ namespace EscapeBuilding
                         Console.Write("  ", firstRoom[ver, hori]);
                     }
 
-                    //첫번째, 두번째 플레이 시 
                     else if (firstRoom[ver, hori].Equals("▣ ")) //창가로 들어오는 빛
                     {
 
@@ -118,7 +122,16 @@ namespace EscapeBuilding
                         Console.ResetColor();
                     }
 
-                    else
+
+
+                    else if (firstRoom[ver, hori].Equals("⁜ ")) //마지막 열쇠
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write($"{firstRoom[ver, hori]}");
+                        Console.ResetColor();
+                    }
+
+                    else 
                     {
                         Console.ForegroundColor = ConsoleColor.Gray; //테두리 출력
                         Console.Write($"{firstRoom[ver, hori]}");
@@ -369,6 +382,17 @@ namespace EscapeBuilding
                     firstRoom[playerVer, playerHori - 1] = ". ";
                     MovingPlayer();
                 }
+
+            }
+
+            if(WillExit.willGetKey>0 && playerVer == 11 && playerHori == 7)
+            {
+                Console.Clear();
+                DrawFirstRoom();
+                Console.SetCursorPosition(mapLeft, mapTop);
+                Console.WriteLine("열쇠를 얻었다!");
+                MovingPlayer();
+
 
             }
 

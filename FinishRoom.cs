@@ -167,8 +167,71 @@ namespace EscapeBuilding
 
         public void PrintMessage()
         {
-            //탈출 문 진입
-            if (playerVer == 1 && playerHori >= 4 && playerHori <= 5)
+            //탈출 문 두번째 진입(키 획득)
+            if(playerVer == 1 && playerHori >= 4 && playerHori <= 5 && StartRoom.iGotKey>0)
+            {
+                Console.SetCursorPosition(mapLeft - 5, mapTop + 22);
+                Console.WriteLine("이번에야 말로 탈출할 수 있는건가...?");
+                Console.SetCursorPosition(mapLeft - 5, mapTop + 23);
+                Console.WriteLine("얻은 열쇠를 사용해보자");
+                Console.SetCursorPosition(mapLeft - 5, mapTop + 25);
+                Console.WriteLine("<열쇠 사용하기: '1'>");
+
+                while (true)
+                {
+                    ConsoleKeyInfo inputKey = Console.ReadKey();
+
+                    switch (inputKey.Key)
+                    {
+                        case ConsoleKey.D1:
+
+                            SecondGameClear();
+
+                            break;
+
+                        case ConsoleKey.W:
+
+                            Console.Clear();
+                            playerVer = 1;
+                            MovingPlayer();
+
+                            break;
+
+                        case ConsoleKey.S:
+
+                            Console.Clear();
+                            lastRoom[playerVer, playerHori] = ". ";
+                            playerVer++;
+                            MovingPlayer();
+
+                            break;
+
+                        case ConsoleKey.A:
+
+                            Console.Clear();
+                            playerHori--;
+                            lastRoom[playerVer, playerHori + 1] = ". ";
+                            MovingPlayer();
+
+                            break;
+
+                        case ConsoleKey.D:
+
+                            Console.Clear();
+                            playerHori++;
+                            lastRoom[playerVer, playerHori - 1] = ". ";
+                            MovingPlayer();
+
+                            break;
+
+                    }
+
+                }
+
+            }
+
+            //탈출 문 첫번째 진입
+            else if (playerVer == 1 && playerHori >= 4 && playerHori <= 5)
             {
                 Console.SetCursorPosition(mapLeft - 5, mapTop + 22);
                 Console.WriteLine("문이다! 하지만 도어락이 걸려있다...");
@@ -304,7 +367,7 @@ namespace EscapeBuilding
                 Console.ResetColor();
 
                 Thread.Sleep(3000);
-                GameClear();
+                FirstGameClear();
             }
 
             else
@@ -322,7 +385,7 @@ namespace EscapeBuilding
             
         }
 
-        public void GameClear()
+        public void FirstGameClear()
         {
             Console.Clear();
             Console.SetCursorPosition(printPassword + 52, 20);
@@ -353,5 +416,23 @@ namespace EscapeBuilding
             Title2 title2 = new Title2();
             title2.EscapeTheBuilding();
         }
+    
+    
+         public void SecondGameClear()
+        {
+            Console.Clear();
+            Console.Write("우왕 탈출");
+            //외부 그림 아스키 아트로 넣기.
+
+            return;
+        }
+    
+    
+    
+    
+    
     }
+
+
+
 }

@@ -13,8 +13,8 @@ namespace EscapeBuilding
         public static int clearNumber = 0;
         static void Main(string[] args)
         {
-            //Title title = new Title();
-            //title.EscapeTheBuilding();
+            Title title = new Title();
+            title.EscapeTheBuilding();
 
 
 
@@ -33,11 +33,11 @@ namespace EscapeBuilding
             //startRoom.DrawFirstRoom();
             //startRoom.MovingPlayer();
 
-            Console.ReadLine();
-            FinishRoom finishRoom = new FinishRoom();
-            finishRoom.LastRoom();
-            finishRoom.DrawLastRoom();
-            finishRoom.MovingPlayer();
+            //Console.ReadLine();
+            //FinishRoom finishRoom = new FinishRoom();
+            //finishRoom.LastRoom();
+            //finishRoom.DrawLastRoom();
+            //finishRoom.MovingPlayer();
 
 
 
