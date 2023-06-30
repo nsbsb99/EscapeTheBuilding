@@ -13,7 +13,7 @@ namespace EscapeBuilding
             TimerCallback callback = new TimerCallback(DecreaseBatteryPercent);
 
             // 타이머 생성 및 시작
-            timer = new Timer(callback, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+            timer = new Timer(callback, null, TimeSpan.FromSeconds(4), TimeSpan.FromSeconds(4));
 
         }
 

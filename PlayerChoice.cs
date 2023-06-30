@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Diagnostics.Eventing.Reader;
 
 namespace EscapeBuilding
 {
@@ -18,7 +19,7 @@ namespace EscapeBuilding
         int mapLeft;
         int mapTop = 5;
         //플레이어의 스텟
-        protected int playerHP = 300;
+        public static int playerHP = 300;
         protected int playerAttack = 50;
         protected int playerSheild = 30;
 
@@ -51,11 +52,28 @@ namespace EscapeBuilding
             battery.StartBatteryTimer();
             battery.DrawBattery();
             
+            if(StartRoom.iGotKey>0)
+            {
+                Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                Console.Write("분명 방법이 있을 것이다.");
+                Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                Console.Write("한번만 더... 문까지 가보자");
+              
+                Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                Console.Write("<진행: 'Enter'>");
+
+                Console.ReadLine();
+
+                Situation();
+
+
+            }
+
 
             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
             Console.Write("손전등을 켜니 앞이 보이기 시작한다.");
             Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
-            Console.Write("배터리로 작동하는 제품같다.");
+            Console.Write("배터리로 작동하는 것 같다.");
             Console.SetCursorPosition(mapLeft + 1, mapTop + 5);
             Console.Write("일단 앞으로 가보자.");
             Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
@@ -116,7 +134,7 @@ namespace EscapeBuilding
                 else //적과 조우
                 {
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("형체를 알 수 없는 것이 뛰어든다!          ");
+                    Console.Write("정체를 알 수 없는 것이 뛰어든다!          ");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
                     Console.Write("                           ");
 
@@ -287,11 +305,19 @@ namespace EscapeBuilding
                     Console.Write("메모를 남긴 그 사람인가...?");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
                     Console.Write("                              ");
-                    playerHP += 30;
-                    Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("체력이 회복되었다.                    ");
 
-                    playerHP = 100;
+                    if (playerHP < 300)
+                    {
+                        playerHP += 30;
+                        Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                        Console.Write("체력이 30 회복되었다.                    ");
+                    }
+
+                    else if (playerHP >= 300)
+                    {
+                        Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                        Console.Write("더이상 회복할 체력이 없다.                ");
+                    }
 
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
                     Console.Write("<계속 진행하기: 'Enter'>");
@@ -345,6 +371,9 @@ namespace EscapeBuilding
                             Console.Clear();
                             drawWindow.DrawMap();
                             statusWindow.StatusMap();
+
+                            Thread.Sleep(1500);
+
                             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                             Console.Write("손전등을 사용해 겨우 도망쳤다...");
                             batteryPercent -= 30;
@@ -403,6 +432,9 @@ namespace EscapeBuilding
                             statusWindow.StatusMap();
                             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                             Console.Write("손전등을 사용해 겨우 도망쳤다...");
+
+                            Thread.Sleep(1500);
+
                             batteryPercent -= 20;
                             playerMoved++;
 
@@ -427,7 +459,11 @@ namespace EscapeBuilding
                     Console.Write("끔찍한 몰골을 한 무언가가 내 발을 물고 있다.");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
                     Console.Write("                              ");
+
+                    Thread.Sleep(1500);
+
                     playerHP -= 60;
+
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write("발을 크게 다쳤다.                    ");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
@@ -491,7 +527,27 @@ namespace EscapeBuilding
                 }
             }
 
-            if (playerMoved >= 1) //임시 수정
+           if( playerMoved>=5 && StartRoom.iGotKey>0)
+            {
+                Console.Clear();
+
+                Console.SetCursorPosition(mapLeft + 24, mapTop + 10);
+                Console.WriteLine("복도가 보인다...!");
+
+                Thread.Sleep(3000);
+                Console.Clear();
+
+                Console.SetCursorPosition(mapLeft + 30, mapTop + 10);
+                Console.WriteLine("이번에야 말로...!");
+
+                Thread.Sleep(3000);
+                Console.Clear();
+
+                finishRoom.LastRoom();
+
+            }
+
+            else if (playerMoved >= 6) //임시 수정
             {
                 Console.Clear(); 
 

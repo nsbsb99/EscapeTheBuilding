@@ -8,17 +8,14 @@ namespace EscapeBuilding
 {
     public class StrongFlash : RandomBattle
     {
- 
-        public void HolyFlash() //문제 생기면 클래스 분리
+        public void HolyFlash() //플래시 강출력 잔량 표시
         {
-
             if (flashNumber == 3)
             {
                 Console.SetCursorPosition(104, 21);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("▣ ▣ ▣");
                 Console.ResetColor();
-
             }
 
             else if (flashNumber == 2)
@@ -27,7 +24,6 @@ namespace EscapeBuilding
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("▣ ▣     ");
                 Console.ResetColor();
-
             }
 
             else if (flashNumber == 1)
@@ -36,16 +32,13 @@ namespace EscapeBuilding
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("▣        ");
                 Console.ResetColor();
-
             }
 
             else
             {
                 Console.SetCursorPosition(113, 21);            
                 Console.Write("          ");
-
             }
-
         }
     }
 }

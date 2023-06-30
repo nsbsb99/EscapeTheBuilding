@@ -27,6 +27,8 @@ namespace EscapeBuilding
         int playerHori = 7;
         //아이템 획득 체크(메모장과 손전등을 획득하지 않았다면 복도로 나가지 못한다.)
         int getItem = 0;
+
+        public static int iGotKey = 0;
         #endregion
 
         public void FirstRoom()
@@ -100,14 +102,14 @@ namespace EscapeBuilding
                     else if (firstRoom[ver, hori].Equals("▣ ")) //창가로 들어오는 빛
                     {
 
-                        if (FinishRoom.clearGame > 0)
+                        if (FinishRoom.clearGame > 0) //첫번째 클리어 이후 
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write($"{firstRoom[ver, hori]}");
                             Console.ResetColor();
                         }
 
-                        else if (FinishRoom.clearGame<=0)
+                        else if (FinishRoom.clearGame<=0) //첫번째 클리어 이전
                         {
                             Console.ForegroundColor = ConsoleColor.DarkCyan;
                             Console.Write($"{firstRoom[ver, hori]}");
@@ -115,7 +117,7 @@ namespace EscapeBuilding
                         }
                     }
 
-                    else if (firstRoom[ver, hori].Equals("© ")) //동전 출력
+                    else if (firstRoom[ver, hori].Equals("© ")) //종이조각, 손전등
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write($"{firstRoom[ver, hori]}");
@@ -124,7 +126,7 @@ namespace EscapeBuilding
 
 
 
-                    else if (firstRoom[ver, hori].Equals("⁜ ")) //마지막 열쇠
+                    else if (firstRoom[ver, hori].Equals("⁜ ")) //열쇠
                     {
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.Write($"{firstRoom[ver, hori]}");
@@ -133,7 +135,7 @@ namespace EscapeBuilding
 
                     else 
                     {
-                        Console.ForegroundColor = ConsoleColor.Gray; //테두리 출력
+                        Console.ForegroundColor = ConsoleColor.Gray; //벽 출력
                         Console.Write($"{firstRoom[ver, hori]}");
                         Console.ResetColor();
                     }
@@ -214,15 +216,13 @@ namespace EscapeBuilding
 
         public void MessagePrint()
         {
-
             int mapLeft = consoleWidth / 2 - 15;
             int mapTop = consoleHeight / 2 + 3;
-
 
             //아이템: 종이조각, 손전등
             if (playerVer == 5 && playerHori == 2 && getItem < 1)
             {
-                if (FinishRoom.clearGame > 0)
+                if (FinishRoom.clearGame > 0) //첫번째 클리어 이후
                 {
                     Console.SetCursorPosition(mapLeft, mapTop);
                     Console.WriteLine("짤막한 글이 적힌 종이조각과 손전등이 또 놓여 있다.");
@@ -230,7 +230,7 @@ namespace EscapeBuilding
                     Console.WriteLine("<아이템 얻기: '1'>");
                 }
 
-                else if (FinishRoom.clearGame == 0)
+                else if (FinishRoom.clearGame == 0) //첫번째 클리어 전
                 {
                     Console.SetCursorPosition(mapLeft, mapTop);
                     Console.WriteLine("짤막한 글이 적힌 종이조각과 손전등이 놓여 있다.");
@@ -244,18 +244,18 @@ namespace EscapeBuilding
 
                     switch (inputKey.Key)
                     {
-                        case ConsoleKey.D1:
+                        case ConsoleKey.D1: //아이템 획득 O
 
                             Console.Clear();
-                            Console.SetCursorPosition(mapLeft - 21, mapTop - 10);
-                            Console.Write("이곳에 얼마나 오래 갇혀 있었는지 모르겠다. 끝이 존재하지 않는다.");
-                            Console.SetCursorPosition(mapLeft - 21, mapTop - 8);
-                            Console.Write("난 이제 지쳐 모든 것을 포기했지만 이 글을 읽은 당신만은 탈출했으면 좋겠다.");
-                            Console.SetCursorPosition(mapLeft - 21, mapTop - 6);
+                            Console.SetCursorPosition(mapLeft - 15, mapTop - 10);
+                            Console.Write("이곳에 얼마나 오래 갇혀 있었는지 모르겠다. 끝이 없다.");
+                            Console.SetCursorPosition(mapLeft - 15, mapTop - 8);
+                            Console.Write("난 이제 지쳤지만 이 글을 읽은 당신만은 탈출했으면 좋겠다.");
+                            Console.SetCursorPosition(mapLeft - 15, mapTop - 6);
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write("- 1029");
                             Console.ResetColor();
-                            Console.SetCursorPosition(mapLeft - 21, mapTop - 3);
+                            Console.SetCursorPosition(mapLeft - 15, mapTop - 3);
                             Console.Write("<'ESC'버튼을 눌러 맵으로 돌아가기>");
 
                             ConsoleKeyInfo escapeKey = Console.ReadKey();
@@ -276,7 +276,7 @@ namespace EscapeBuilding
 
                             break;
 
-                        case ConsoleKey.W:
+                        case ConsoleKey.W: //아이템 획득 X
 
                             Console.Clear();
                             playerVer--;
@@ -286,7 +286,7 @@ namespace EscapeBuilding
 
                             break;
 
-                        case ConsoleKey.S:
+                        case ConsoleKey.S: //아이템 획득 X
 
                             Console.Clear();
                             playerVer++;
@@ -295,7 +295,7 @@ namespace EscapeBuilding
 
                             break;
 
-                        case ConsoleKey.A:
+                        case ConsoleKey.A: //아이템 획득 X
 
                             Console.Clear();
                             playerHori--;
@@ -304,7 +304,7 @@ namespace EscapeBuilding
 
                             break;
 
-                        case ConsoleKey.D:
+                        case ConsoleKey.D: //아이템 획득 X
 
                             Console.Clear();
                             playerHori++;
@@ -317,15 +317,9 @@ namespace EscapeBuilding
             }
 
             //아이템: 창문
-            if (playerVer >= 9 && playerVer < 14 && playerHori >= 5 && playerHori < 10)
+            else if (playerVer >= 9 && playerVer < 14 && playerHori >= 5 && playerHori < 10)
             {
-                if (FinishRoom.clearGame > 0)
-                {
-                    Console.SetCursorPosition(mapLeft, mapTop);
-                    Console.WriteLine("철창 사이로 햇빛이 들어온다...?");
-                }
-
-                else if (FinishRoom.clearGame == 0)
+                if (FinishRoom.clearGame == 0) //첫번째 클리어 이전
                 {
                     Console.SetCursorPosition(mapLeft, mapTop);
                     Console.WriteLine("철창 사이로 달빛이 들어온다.");
@@ -333,6 +327,11 @@ namespace EscapeBuilding
                     Console.WriteLine("창문으로 탈출하는 것은 불가능해 보인다.");
                 }
 
+                else if (FinishRoom.clearGame > 0) //첫번째 클리어 이후
+                {
+                    Console.SetCursorPosition(mapLeft, mapTop);
+                    Console.WriteLine("철창 사이로 햇빛이 들어온다...?");
+                }
             }
 
             //복도로 나가기
@@ -344,20 +343,18 @@ namespace EscapeBuilding
                 Console.WriteLine("<상호작용: '1'>");
 
                 ConsoleKeyInfo inputKey = Console.ReadKey();
-
-                if(inputKey.Key == ConsoleKey.D1 && FinishRoom.clearGame > 0)
+              
+                if(inputKey.Key == ConsoleKey.D1 && iGotKey>0)
                 {
-                    WillExit willExit = new WillExit();
-                    willExit.KeySound();
-
+                    PlayerChoice playerChoice = new PlayerChoice();
+                    playerChoice.ChoicePaper();
                 }
-
 
                 else if (inputKey.Key == ConsoleKey.D1 && getItem >= 1)
                 {
                     Console.Clear();
                     MainConsole mainConsole = new MainConsole();
-                    mainConsole.FirstPrint(); //타 cs 메서드 호출
+                    mainConsole.FirstPrint(); 
                 }
 
                 else if (inputKey.Key == ConsoleKey.D1 && getItem < 1)
@@ -382,18 +379,16 @@ namespace EscapeBuilding
                     firstRoom[playerVer, playerHori - 1] = ". ";
                     MovingPlayer();
                 }
-
             }
 
-            if(WillExit.willGetKey>0 && playerVer == 11 && playerHori == 7)
+            else if(WillExit.willGetKey>0 && playerVer == 11 && playerHori == 7)
             {
+                iGotKey++;
                 Console.Clear();
                 DrawFirstRoom();
                 Console.SetCursorPosition(mapLeft, mapTop);
                 Console.WriteLine("열쇠를 얻었다!");
                 MovingPlayer();
-
-
             }
 
             //위 메시지 출력 조건들에 맞지 않는다면 계속 맵을 탐색하도록 함.

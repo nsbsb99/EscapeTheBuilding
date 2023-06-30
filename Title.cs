@@ -12,24 +12,24 @@ namespace EscapeBuilding
     {
         public void EscapeTheBuilding()
         {
+            #region
+            //콘솔 너비
             int consoleWidth1 = Console.WindowWidth;
             int consoleHeight1 = Console.WindowHeight;
-
+            //배터리 잔량 
             PlayerChoice.batteryPercent = 100;
-
-            //가운데 위치 잡기
+            //출력 위치 잡기
             int mapLeft = consoleWidth1 / 2;
             int mapTop = consoleHeight1 / 2;
+            #endregion
 
             Console.SetCursorPosition(mapLeft + 2, mapTop);
-
-
+            
+            //제목 출력
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Escape The Building");
             Console.ResetColor();
-
-
-
+            //선택지
             Console.SetCursorPosition(mapLeft + 7, mapTop + 10);
             Console.WriteLine("시작하기");
             Console.SetCursorPosition(mapLeft + 7, mapTop + 13);
@@ -42,11 +42,9 @@ namespace EscapeBuilding
             Console.SetCursorPosition(mapLeft + 4, mapTop + 10);
             Console.Write("▶ ");
 
-
             while (true)
             {
                 ConsoleKeyInfo triangleInput = Console.ReadKey();
-
 
                 switch (triangleInput.Key)
                 {
@@ -57,7 +55,6 @@ namespace EscapeBuilding
 
                         if (changeLocation[0, 0].Equals("▶ ")) //시작하기 -> 그만두기
                         {
-
                             changeLocation[0, 0] = ". ";
                             changeLocation[1, 0] = "▶ ";
 
@@ -78,8 +75,6 @@ namespace EscapeBuilding
 
                             Console.SetCursorPosition(mapLeft + 4, mapTop + 10);
                             Console.Write($"{changeLocation[0, 0]}");
-
-
                         }
 
                         break;
@@ -96,7 +91,6 @@ namespace EscapeBuilding
                             startRoom.MovingPlayer();
 
                             return;
-
                         }
 
                         else if (changeLocation[1, 0].Equals("▶ ")) //그만두기 -> 시작하기
@@ -107,7 +101,6 @@ namespace EscapeBuilding
                         }
 
                         break;
-
                 }
             }
         }

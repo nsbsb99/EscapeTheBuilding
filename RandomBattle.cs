@@ -199,11 +199,8 @@ namespace EscapeBuilding
 
                         else if (flashNumber <= 0)
                         {
-                            Console.Clear();
-                            drawMap.DrawMap();
-
                             Console.SetCursorPosition(108, 21);
-                            Console.Write("더이상 사용할 수 없음.");
+                            Console.Write("사용불가.");
 
                             Thread.Sleep(1000);
                             Console.SetCursorPosition(108, 21);
@@ -223,8 +220,10 @@ namespace EscapeBuilding
 
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write($"승리! 계속 출구를 찾자.");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<계속 진행하기: 'Enter'");
 
-                    Thread.Sleep(2000);
+                    Console.ReadLine();
 
                     playerChoice.Situation();
                 }
@@ -277,7 +276,6 @@ namespace EscapeBuilding
             Console.Write("<방어한다: '2'>");
             Console.SetCursorPosition(mapLeft + 1, mapTop + 21);
             Console.Write("<플래시 사용: '3'>");
-
         }
     }
 }
