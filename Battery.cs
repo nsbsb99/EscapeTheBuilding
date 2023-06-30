@@ -5,15 +5,16 @@ namespace EscapeBuilding
 {
     public class Battery : PlayerChoice
     {
-        private int batteryPercent = 100;
-       
+
         public void StartBatteryTimer()
         {
+
             // 타이머 콜백 메서드 설정
             TimerCallback callback = new TimerCallback(DecreaseBatteryPercent);
 
             // 타이머 생성 및 시작
-            timer = new Timer(callback, null, TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(15));
+            timer = new Timer(callback, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+
         }
 
         public void StopBatteryTimer()
@@ -31,32 +32,29 @@ namespace EscapeBuilding
             DrawBattery();
         }
 
-
         public void DrawBattery()
         {
-
-            Console.SetCursorPosition(110, 12);
+            Console.SetCursorPosition(103, 12);
             Console.WriteLine("Battery");
 
-            if(batteryPercent == 100)
+            if (batteryPercent == 100)
             {
                 Console.BackgroundColor = ConsoleColor.Green;
                 Console.ForegroundColor = ConsoleColor.Green;
 
-                Console.SetCursorPosition(112, 14);
+                Console.SetCursorPosition(105, 14);
                 Console.WriteLine("⁜⁜⁜");
-                Console.SetCursorPosition(112, 15);
+                Console.SetCursorPosition(105, 15);
                 Console.WriteLine("⁜⁜⁜");
-                Console.SetCursorPosition(112, 16);
+                Console.SetCursorPosition(105, 16);
                 Console.WriteLine("⁜⁜⁜");
-                Console.SetCursorPosition(112, 17);
+                Console.SetCursorPosition(105, 17);
                 Console.WriteLine("⁜⁜⁜");
 
                 Console.ResetColor();
 
-                Console.SetCursorPosition(112, 19);
+                Console.SetCursorPosition(105, 19);
                 Console.WriteLine($"{batteryPercent}");
-
 
             }
 
@@ -66,55 +64,85 @@ namespace EscapeBuilding
                 Console.BackgroundColor = ConsoleColor.Green;
                 Console.ForegroundColor = ConsoleColor.Green;
 
-                Console.SetCursorPosition(112, 14);
+                Console.SetCursorPosition(105, 14);
                 Console.WriteLine("⁜⁜⁜");
-                Console.SetCursorPosition(112, 15);
+                Console.SetCursorPosition(105, 15);
                 Console.WriteLine("⁜⁜⁜");
-                Console.SetCursorPosition(112, 16);
+                Console.SetCursorPosition(105, 16);
                 Console.WriteLine("⁜⁜⁜");
-                Console.SetCursorPosition(112, 17);
+                Console.SetCursorPosition(105, 17);
                 Console.WriteLine("⁜⁜⁜");
 
                 Console.ResetColor();
 
-                Console.SetCursorPosition(112, 19);
+                Console.SetCursorPosition(105, 19);
                 Console.WriteLine($" {batteryPercent}");
             }
 
-            else if(batteryPercent<70 && batteryPercent>=30)
+            else if (batteryPercent < 70 && batteryPercent >= 30)
             {
+
+                Console.SetCursorPosition(105, 14);
+                Console.WriteLine("   ");
+                Console.SetCursorPosition(105, 15);
+                Console.WriteLine("   ");
                 Console.BackgroundColor = ConsoleColor.Yellow;
                 Console.ForegroundColor = ConsoleColor.Yellow;
-
-                Console.SetCursorPosition(112, 16);
+                Console.SetCursorPosition(105, 16);
                 Console.WriteLine("⁜⁜⁜");
-                Console.SetCursorPosition(112, 17);
+                Console.SetCursorPosition(105, 17);
                 Console.WriteLine("⁜⁜⁜");
 
                 Console.ResetColor();
 
-                Console.SetCursorPosition(112, 19);
-                Console.WriteLine($"{batteryPercent}");
+                Console.SetCursorPosition(105, 19);
+                Console.WriteLine($" {batteryPercent}");
 
             }
 
-            else if(batteryPercent <30 && batteryPercent>0)
+            else if (batteryPercent < 30 && batteryPercent > 0)
             {
+
+                Console.SetCursorPosition(105, 14);
+                Console.WriteLine("   ");
+                Console.SetCursorPosition(105, 15);
+                Console.WriteLine("   ");
+                Console.SetCursorPosition(105, 16);
+                Console.WriteLine("   ");
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.Red;
-
-          
-                Console.SetCursorPosition(112, 17);
+                Console.SetCursorPosition(105, 17);
                 Console.WriteLine("⁜⁜⁜");
 
                 Console.ResetColor();
 
-                Console.SetCursorPosition(112, 19);
-                Console.WriteLine($"{batteryPercent}");
+                Console.SetCursorPosition(105, 19);
+                Console.WriteLine($" {batteryPercent}");
 
             }
 
-            else if (batteryPercent <=0)
+            else if (batteryPercent <= 9 && batteryPercent > 0)
+            {
+
+
+                Console.SetCursorPosition(105, 14);
+                Console.WriteLine("   ");
+                Console.SetCursorPosition(105, 15);
+                Console.WriteLine("   ");
+                Console.SetCursorPosition(105, 16);
+                Console.WriteLine("   ");
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.SetCursorPosition(105, 17);
+                Console.WriteLine("⁜⁜⁜");
+
+                Console.ResetColor();
+
+                Console.SetCursorPosition(105, 19);
+                Console.WriteLine($"     {batteryPercent}");
+            }
+
+            else if (batteryPercent <= 0)
             {
                 StopBatteryTimer();
 

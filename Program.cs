@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EscapeBuilding.EscapeBuilding;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +10,11 @@ namespace EscapeBuilding
 {   
     public class Program
     {
-        
+        public static int clearNumber = 0;
         static void Main(string[] args)
         {
-
-            StartRoom startroom = new StartRoom();
-            startroom.FirstRoom();
-            startroom.DrawFirstRoom();
-            startroom.MovingPlayer();
+            //Title title = new Title();
+            //title.EscapeTheBuilding();
 
 
 
@@ -25,7 +23,24 @@ namespace EscapeBuilding
             //StatusWindow statusWindow = new StatusWindow();
             //statusWindow.StatusMap();
             //StrongFlash strongFlash= new StrongFlash();
-            
+
+            //Console.ReadLine();  
+            //Title title = new Title();
+            //title.EscapeTheBuilding();
+
+            //StartRoom startRoom = new StartRoom();
+            //startRoom.FirstRoom();
+            //startRoom.DrawFirstRoom();
+            //startRoom.MovingPlayer();
+
+            Console.ReadLine();
+            FinishRoom finishRoom = new FinishRoom();
+            finishRoom.LastRoom();
+            finishRoom.DrawLastRoom();
+            finishRoom.MovingPlayer();
+
+
+
         }
     }
 }

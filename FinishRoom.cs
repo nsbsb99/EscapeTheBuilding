@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using EscapeBuilding.EscapeBuilding;
 
 namespace EscapeBuilding
 {
@@ -14,8 +15,7 @@ namespace EscapeBuilding
         //실 맵 크기는 10x25(가로가 10)
         string[,] lastRoom = new string[30, 15];
         //맵을 가운데 출력
-        int mapVerSize = 25;
-        int mapHoriSize = 10;
+        
         int consoleWidth = Console.WindowWidth;
         int consoleHeight = Console.WindowHeight;
         //맵 가운데 위치 잡기
@@ -25,7 +25,10 @@ namespace EscapeBuilding
         int playerVer = 20;
         int playerHori = 5;
         //클리어 횟수 추가 (클리어 횟수에 따른 엔딩 분기)
-        int clearGame = 0;
+        public static int clearGame = 0;
+
+        int printPassword;
+
 
         public void LastRoom()
         {
@@ -69,10 +72,11 @@ namespace EscapeBuilding
         public void DrawLastRoom()
         {
             //가운데 위치 잡기
-            mapLeft = (consoleWidth - mapHoriSize) / 2;
-            mapTop = (consoleHeight - mapVerSize) / 2;
+            mapLeft = consoleWidth/2 - 5;
+            mapTop = consoleHeight/2 - 25/ 2;
 
-            Console.SetCursorPosition(mapLeft, mapTop);
+            Console.SetCursorPosition(mapLeft - 5, mapTop - 5);
+
             for (int ver = 0; ver < 25; ver++)
             {
                 for (int hori = 0; hori < 10; hori++)
@@ -90,7 +94,7 @@ namespace EscapeBuilding
                     }
                 }
                 Console.WriteLine();
-                Console.SetCursorPosition(mapLeft, Console.CursorTop);
+                Console.SetCursorPosition(mapLeft - 5, Console.CursorTop);
             }
 
         }
@@ -166,9 +170,11 @@ namespace EscapeBuilding
             //탈출 문 진입
             if (playerVer == 1 && playerHori >= 4 && playerHori <= 5)
             {
-                Console.SetCursorPosition(mapLeft - 5, mapTop + 28);
+                Console.SetCursorPosition(mapLeft - 5, mapTop + 22);
                 Console.WriteLine("문이다! 하지만 도어락이 걸려있다...");
-                Console.SetCursorPosition(mapLeft - 1, mapTop + 29);
+                Console.SetCursorPosition(mapLeft - 5, mapTop + 23);
+                Console.WriteLine("열쇠구멍은 왜 있는거야??");
+                Console.SetCursorPosition(mapLeft - 5, mapTop + 25);
                 Console.WriteLine("<비밀번호 입력하기: '1'>");
 
                 while (true)
@@ -186,7 +192,7 @@ namespace EscapeBuilding
                         case ConsoleKey.W:
 
                             Console.Clear();
-                            playerVer--;
+                            playerVer = 1;
                             MovingPlayer();
 
                             break;
@@ -194,6 +200,7 @@ namespace EscapeBuilding
                         case ConsoleKey.S:
 
                             Console.Clear();
+                            lastRoom[playerVer, playerHori] = ". ";
                             playerVer++;
                             MovingPlayer();
 
@@ -225,9 +232,9 @@ namespace EscapeBuilding
 
             if (playerVer == 23 && playerHori >= 4 && playerHori <= 5)
             {
-                Console.SetCursorPosition(mapLeft, mapTop + 28);
+                Console.SetCursorPosition(mapLeft - 5, mapTop + 22);
                 Console.WriteLine("이미 지나온 문이다.");
-                Console.SetCursorPosition(mapLeft, mapTop + 29);
+                Console.SetCursorPosition(mapLeft - 5, mapTop + 23);
                 Console.WriteLine("왜 잠겨있지...?");
 
                 ConsoleKeyInfo inputKey = Console.ReadKey();
@@ -275,25 +282,26 @@ namespace EscapeBuilding
         {
 
             
-            int printPassword = consoleHeight / 2;
+            printPassword = consoleHeight / 2;
             string inputPassword;
  
             Console.Clear();
-            Console.SetCursorPosition(printPassword+55, 20);
+            Console.SetCursorPosition(printPassword+52, 20);
             Console.WriteLine("────");
 
+            Console.SetCursorPosition(printPassword + 52, 19);
             inputPassword = Console.ReadLine();
            
-            Console.SetCursorPosition(printPassword + 55, 19);
-            Console.Write(inputPassword);
 
             Thread.Sleep(3000);
 
             if(inputPassword == "1029")
             {
                 Console.Clear();
-                Console.SetCursorPosition(printPassword + 55, 20);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.SetCursorPosition(printPassword + 52, 20);
                 Console.WriteLine("통과");
+                Console.ResetColor();
 
                 Thread.Sleep(3000);
                 GameClear();
@@ -302,7 +310,8 @@ namespace EscapeBuilding
             else
             {
                 Console.Clear();
-                Console.SetCursorPosition(printPassword + 45, 20);
+                lastRoom[playerVer, playerHori] = ". ";
+                Console.SetCursorPosition(printPassword + 40, 20);
                 Console.WriteLine("비밀번호가 바르지 않습니다.");
 
                 Thread.Sleep(3000);
@@ -315,11 +324,34 @@ namespace EscapeBuilding
 
         public void GameClear()
         {
+            Console.Clear();
+            Console.SetCursorPosition(printPassword + 52, 20);
+            Console.WriteLine(".");
+            Thread.Sleep(500);
+            Console.SetCursorPosition(printPassword + 53, 20);
+            Console.WriteLine(".");
+            Thread.Sleep(500);
+            Console.SetCursorPosition(printPassword + 54, 20);
+            Console.WriteLine(".");
+            Thread.Sleep(500);
+            Console.SetCursorPosition(printPassword + 55, 20);
+            Console.WriteLine("?");
+
+            Thread.Sleep(1500);
+
+            clearGame++;
 
             Console.Clear();
-            Console.WriteLine("임시 클리어");
+            StartRoom startRoom = new StartRoom();
+            startRoom.FirstRoom();
+            startRoom.DrawFirstRoom();
 
-            return;
+            Thread.Sleep(3000);
+            Console.Clear();
+
+
+            Title2 title2 = new Title2();
+            title2.EscapeTheBuilding();
         }
     }
 }

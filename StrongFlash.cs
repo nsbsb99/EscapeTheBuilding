@@ -14,7 +14,7 @@ namespace EscapeBuilding
 
             if (flashNumber == 3)
             {
-                Console.SetCursorPosition(111, 21);
+                Console.SetCursorPosition(104, 21);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("▣ ▣ ▣");
                 Console.ResetColor();
@@ -23,7 +23,7 @@ namespace EscapeBuilding
 
             else if (flashNumber == 2)
             {
-                Console.SetCursorPosition(111, 21);
+                Console.SetCursorPosition(104, 21);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("▣ ▣     ");
                 Console.ResetColor();
@@ -32,7 +32,7 @@ namespace EscapeBuilding
 
             else if (flashNumber == 1)
             {
-                Console.SetCursorPosition(111, 21);
+                Console.SetCursorPosition(104, 21);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("▣        ");
                 Console.ResetColor();

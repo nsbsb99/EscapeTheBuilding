@@ -30,6 +30,8 @@ namespace EscapeBuilding
 
         protected int flashNumber = 3;
 
+        public static int batteryPercent = 0;
+
         #endregion
 
         public void ChoicePaper() //복도에서의 첫번째 상황은 고정 
@@ -37,13 +39,18 @@ namespace EscapeBuilding
             DrawWindow drawWindow = new DrawWindow();
             StatusWindow statusWindow = new StatusWindow();
             RandomBattle randomBattle = new RandomBattle();
+            Battery battery = new Battery();
             Random rand = new Random();
 
             mapLeft = (consoleWidth - mapSize) / 3 + 3; //33
             //출력창 두 개 출력
             drawWindow.DrawMap();
-            //배터리와 스테이터스창 출력
+            //스테이터스창 출력
             statusWindow.StatusMap();
+
+            battery.StartBatteryTimer();
+            battery.DrawBattery();
+            
 
             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
             Console.Write("손전등을 켜니 앞이 보이기 시작한다.");
@@ -55,7 +62,7 @@ namespace EscapeBuilding
             Console.Write("<진행: 'Enter'>");
 
             Console.ReadLine();
-            
+
 
             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
             Console.Write("무언가 이상하다...                 ");
@@ -83,19 +90,21 @@ namespace EscapeBuilding
             {
                 int getBack = rand.Next(10);
 
-                Console.Clear();
-                drawWindow.DrawMap();
-                statusWindow.StatusMap();
-
                 if (getBack >= 0 && getBack <= 4) //회피
                 {
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write("뒤를 돌아봤지만 아무 것도 없다...");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
-                    Console.Write("착각이었나?");
+                    Console.Write("착각이었나?                       ");
 
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
                     Console.Write("<계속 진행하기: 'Enter'>");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 20);
+                    Console.Write("                           ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 21);
+                    Console.Write("                           ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 22);
+                    Console.Write("                           ");
 
                     Console.ReadLine();
 
@@ -107,11 +116,22 @@ namespace EscapeBuilding
                 else //적과 조우
                 {
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("형체를 알 수 없는 것이 뛰어든다!");
+                    Console.Write("형체를 알 수 없는 것이 뛰어든다!          ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                    Console.Write("                           ");
 
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
-                    Console.Write("<전투 진행하기: 'Enter'>");
-
+                    Console.Write("<전투 진행하기: 'Enter'>           ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 20);
+                    Console.Write("                      ");
+                    Console.ResetColor();
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 21);
+                    Console.Write("                      ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 22);
+                    Console.Write("                      ");
+                    Console.ResetColor();
                     Console.ReadLine();
 
                     randomBattle.WhatMonster();
@@ -122,19 +142,23 @@ namespace EscapeBuilding
             {
                 int run = rand.Next(10);
 
-                Console.Clear();
-                drawWindow.DrawMap();
-                statusWindow.StatusMap();
+
 
                 if (run >= 0 && run <= 4) //회피 
                 {
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("무사히 도망친 것 같다...");
+                    Console.Write("무사히 도망친 것 같다...           ");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
-                    Console.Write("뭐였지?");
+                    Console.Write("뭐였지?                   ");
 
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
-                    Console.Write("<계속 진행하기: 'Enter'>");
+                    Console.Write("<계속 진행하기: 'Enter'>           ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 20);
+                    Console.Write("                               ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 21);
+                    Console.Write("                               ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 22);
+                    Console.Write("                                ");
 
                     Console.ReadLine();
 
@@ -142,22 +166,28 @@ namespace EscapeBuilding
                     Situation();
                 }
 
-                else if(run>4 && run <10) //적과 조우
+                else if (run > 4 && run < 10) //적과 조우
                 {
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("도망치던 와중에 옷깃을 잡혀버렸다...!");
+                    Console.Write("도망치던 와중에 옷깃을 잡혀버렸다...!            ");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
-                    Console.Write("무언가 덤벼든다!");
+                    Console.Write("무언가 덤벼든다!                    ");
 
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
-                    Console.Write("<전투 진행하기: 'Enter'>");
+                    Console.Write("<전투 진행하기: 'Enter'>             ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 20);
+                    Console.Write("                           ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 21);
+                    Console.Write("                           ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 22);
+                    Console.Write("                           ");
 
                     Console.ReadLine();
 
                     randomBattle.WhatMonster();
                 }
             }
-        } 
+        }
 
         public void Situation() //첫번째 이후의 선택은 랜덤 
         {
@@ -172,10 +202,10 @@ namespace EscapeBuilding
             int mapLeft = 33;
             int mapTop = 5;
 
-            while (playerMoved < 4) // 나중에 추가
+            while (playerMoved < 12) // 나중에 추가
             {
                 playerMoved++;
-                int choiceSituation = rand.Next(4); // 일단 이것만 만들어보기.
+                int choiceSituation = rand.Next(6); // 일단 이것만 만들어보기.
 
                 Console.Clear();
                 drawWindow.DrawMap();
@@ -200,8 +230,10 @@ namespace EscapeBuilding
                     Console.Write("갈아끼우자.             ");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
                     Console.Write("                                  ");
-                    //배터리 100퍼센트로.
-                    Thread.Sleep(3000);
+
+                    Thread.Sleep(1500);
+
+                    batteryPercent = 100;
 
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write("손전등이 더 환히 빛난다.                     ");
@@ -214,7 +246,7 @@ namespace EscapeBuilding
                     Console.ReadLine();
                 }
 
-                if (choiceSituation == 1)
+                else if (choiceSituation == 1)
                 {
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write("하염없이 걷고 또 걸었다.");
@@ -230,13 +262,15 @@ namespace EscapeBuilding
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
                     Console.Write("또 다른 무언가다.                   ");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
-                    Console.Write("                                   ");
-                    Thread.Sleep(3000);
+                    Console.Write("<전투 진행하기: 'Enter'>         ");
+
+                    Console.ReadLine();
+
                     Console.Clear();
                     randomBattle.WhatMonster();
                 }
 
-                if (choiceSituation == 2)
+                else if (choiceSituation == 2)
                 {
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write("이곳은 무언가 온기가 느껴진다.");
@@ -257,13 +291,15 @@ namespace EscapeBuilding
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write("체력이 회복되었다.                    ");
 
+                    playerHP = 100;
+
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
                     Console.Write("<계속 진행하기: 'Enter'>");
 
                     Console.ReadLine();
                 }
 
-                if (choiceSituation == 3)
+                else if (choiceSituation == 3)
                 {
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                     Console.Write("정체를 알 수 없는 무언가 쫓아와 한참을 뛰었다.");
@@ -274,13 +310,13 @@ namespace EscapeBuilding
 
                     Thread.Sleep(3000);
 
-                    Console.Clear();
-                    drawWindow.DrawMap();
-                    statusWindow.StatusMap();
 
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
-                    Console.Write("맞서 싸울까, 계속 도망칠까?");
-
+                    Console.Write("맞서 싸울까, 계속 도망칠까?                     ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                    Console.Write("                                   ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 4);
+                    Console.Write("                           ");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
                     Console.Write("<맞서 싸우기: '1'>");
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 20);
@@ -301,7 +337,7 @@ namespace EscapeBuilding
                             Thread.Sleep(3000);
 
                             randomBattle.WhatMonster();
-              
+
                             break;
 
                         case ConsoleKey.D2:
@@ -311,31 +347,169 @@ namespace EscapeBuilding
                             statusWindow.StatusMap();
                             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                             Console.Write("손전등을 사용해 겨우 도망쳤다...");
-                            //손전등 배터리 감소
+                            batteryPercent -= 30;
                             playerMoved++;
 
                             break;
 
                     }
                 }
+
+                else if (choiceSituation == 4)
+                {
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                    Console.Write("발소리를 죽이고 걷기를 한참,");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                    Console.Write("방심한 나머지 큰소리를 내고 말았다.");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 4);
+                    Console.Write("저 거머리 같은 것을 어떻게 떼어내지?");
+
+                    Thread.Sleep(3000);
+
+                    Console.Clear();
+                    drawWindow.DrawMap();
+                    statusWindow.StatusMap();
+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                    Console.Write("맞서 싸울까, 계속 도망칠까?");
+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<맞서 싸우기: '1'>");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 20);
+                    Console.Write("<계속 도망치기: '2'>");
+
+                    ConsoleKeyInfo choiceKey_4 = Console.ReadKey();
+
+                    switch (choiceKey_4.Key)
+                    {
+                        case ConsoleKey.D1:
+
+                            Console.Clear();
+                            drawWindow.DrawMap();
+                            statusWindow.StatusMap();
+                            Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                            Console.Write("싸워야만 한다!");
+
+                            Thread.Sleep(1500);
+
+                            randomBattle.WhatMonster();
+
+                            break;
+
+                        case ConsoleKey.D2:
+
+                            Console.Clear();
+                            drawWindow.DrawMap();
+                            statusWindow.StatusMap();
+                            Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                            Console.Write("손전등을 사용해 겨우 도망쳤다...");
+                            batteryPercent -= 20;
+                            playerMoved++;
+
+                            break;
+                    }
+                }
+
+                else if (choiceSituation == 5)
+                {
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                    Console.Write("사람 목소리...?");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                    Console.Write("나말고 다른 사람이 있어!");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<방으로 진입하기: 'Enter'>");
+
+                    Console.ReadLine();
+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                    Console.Write("아니야...               ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                    Console.Write("끔찍한 몰골을 한 무언가가 내 발을 물고 있다.");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("                              ");
+                    playerHP -= 60;
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                    Console.Write("발을 크게 다쳤다.                    ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                    Console.Write("                                          ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<계속 진행하기: 'Enter'>");
+
+                    Console.ReadLine();
+                }
+
+                else if (choiceSituation == 6)
+                {
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                    Console.Write("계단을 이용해 내려가던 중");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                    Console.Write("아래에서 나를 노려보고 있는 것을 발견했다.");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("<전투 시작하기: '1'>");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 20);
+                    Console.Write("<뒤로 도망가기: '2'>");
+
+                    ConsoleKeyInfo choiceKey_6 = Console.ReadKey();
+
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                    Console.Write("                                       ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                    Console.Write("                     ");
+                    Console.SetCursorPosition(mapLeft + 1, mapTop + 20);
+                    Console.Write("                        ");
+
+                    switch (choiceKey_6.Key)
+                    {
+                        case ConsoleKey.D1:
+
+                            Console.Clear();
+                            drawWindow.DrawMap();
+                            statusWindow.StatusMap();
+                            Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                            Console.Write("통과해야 한다!           ");
+                            
+                            
+                            Thread.Sleep(1500);
+
+                            randomBattle.WhatMonster();
+
+                            break;
+
+                        case ConsoleKey.D2:
+
+                            Console.Clear();
+                            drawWindow.DrawMap();
+                            statusWindow.StatusMap();
+                            Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
+                            Console.Write("손전등을 사용해 겨우 도망쳤다...");
+                            batteryPercent -= 20;
+                            playerMoved++;
+
+                            break;
+                    }
+
+                }
             }
 
-            Thread.Sleep(3000);
-            Console.Clear();
+            if (playerMoved >= 1) //임시 수정
+            {
+                Console.Clear(); 
 
-            Console.SetCursorPosition(mapLeft+24, mapTop + 10);
-            Console.WriteLine("저 앞에 새로운 복도가 보인다...!");
+                Console.SetCursorPosition(mapLeft + 24, mapTop + 10);
+                Console.WriteLine("저 앞에 새로운 복도가 보인다...!");
 
-            Thread.Sleep(3000);
-            Console.Clear();
+                Thread.Sleep(3000);
+                Console.Clear();
 
-            Console.SetCursorPosition(mapLeft+30, mapTop + 10);
-            Console.WriteLine("분명 탈출구야!");
+                Console.SetCursorPosition(mapLeft + 30, mapTop + 10);
+                Console.WriteLine("분명 탈출구야!");
 
-            Thread.Sleep(3000);
-            Console.Clear();
+                Thread.Sleep(3000);
+                Console.Clear();
 
-            finishRoom.LastRoom();
+                finishRoom.LastRoom();
+            }
         }
     }
 }
+

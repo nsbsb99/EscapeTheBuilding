@@ -55,6 +55,8 @@
     <Compile Include="StatusWindow.cs" />
     <Compile Include="StrongFlash.cs" />
     <Compile Include="Title.cs" />
+    <Compile Include="Title2.cs" />
+    <Compile Include="WillExit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
