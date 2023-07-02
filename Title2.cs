@@ -20,6 +20,9 @@ namespace EscapeBuilding
         {
             public void EscapeTheBuilding()
             {
+                Battery battery = new Battery();
+                battery.StopBatteryTimer();
+
                 int consoleWidth2 = Console.WindowWidth;
                 int consoleHeight2 = Console.WindowHeight;
 

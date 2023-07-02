@@ -16,31 +16,6 @@ namespace EscapeBuilding
             Title title = new Title();
             title.EscapeTheBuilding();
 
-
-
-
-            //임시. 작동 확인용
-            //StatusWindow statusWindow = new StatusWindow();
-            //statusWindow.StatusMap();
-            //StrongFlash strongFlash= new StrongFlash();
-
-            //Console.ReadLine();  
-            //Title title = new Title();
-            //title.EscapeTheBuilding();
-
-            //StartRoom startRoom = new StartRoom();
-            //startRoom.FirstRoom();
-            //startRoom.DrawFirstRoom();
-            //startRoom.MovingPlayer();
-
-            //Console.ReadLine();
-            //FinishRoom finishRoom = new FinishRoom();
-            //finishRoom.LastRoom();
-            //finishRoom.DrawLastRoom();
-            //finishRoom.MovingPlayer();
-
-
-
         }
     }
 }

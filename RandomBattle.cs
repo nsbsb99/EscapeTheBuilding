@@ -191,8 +191,10 @@ namespace EscapeBuilding
 
                             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                             Console.Write($"최대 출력을 끌어내 {monsterName[monsterRand]}를 격퇴했다.");
+                            Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
+                            Console.Write("<계속 진행하기: 'Enter'>");
 
-                            Thread.Sleep(2500);
+                            Console.ReadLine();
 
                             playerChoice.Situation();
                         }
@@ -207,9 +209,20 @@ namespace EscapeBuilding
                             Console.Write("                       ");
                         }
 
+                   
 
                         break;
 
+                    case ConsoleKey.S: //스킵 키
+
+                        Console.Clear();
+
+                        FinishRoom finishRoom = new FinishRoom();
+                        finishRoom.LastRoom();
+                        finishRoom.DrawLastRoom();
+                        finishRoom.MovingPlayer();
+
+                        break;
                 }
 
                 //종료조건1 체크 (승리)

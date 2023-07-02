@@ -29,9 +29,14 @@ namespace EscapeBuilding
 
         int printPassword;
 
+        Battery battery = new Battery();
 
         public void LastRoom()
         {
+            Console.Clear();
+
+            battery.StopBatteryTimer();
+
             //맵 내부 생성
             for (int ver = 1; ver < 24; ver++)
             {
@@ -71,6 +76,7 @@ namespace EscapeBuilding
 
         public void DrawLastRoom()
         {
+            
             //가운데 위치 잡기
             mapLeft = consoleWidth/2 - 5;
             mapTop = consoleHeight/2 - 25/ 2;
@@ -307,6 +313,7 @@ namespace EscapeBuilding
  
                         Console.Clear();
                         playerVer--;
+                        lastRoom[playerVer++, playerHori] = ". ";
                         MovingPlayer();
 
                         break;
@@ -323,7 +330,7 @@ namespace EscapeBuilding
 
                         Console.Clear();
                         playerHori--;
-                        lastRoom[playerVer, playerHori + 1] = ". ";
+                        lastRoom[playerVer, playerHori++] = ". ";
                         MovingPlayer();
 
                         break;
@@ -332,7 +339,7 @@ namespace EscapeBuilding
 
                         Console.Clear();
                         playerHori++;
-                        lastRoom[playerVer, playerHori - 1] = ". ";
+                        lastRoom[playerVer, playerHori--] = ". ";
                         MovingPlayer();
 
                         break;
@@ -420,9 +427,16 @@ namespace EscapeBuilding
     
          public void SecondGameClear()
         {
+            battery.StopBatteryTimer();
+
             Console.Clear();
-            Console.Write("우왕 탈출");
-            //외부 그림 아스키 아트로 넣기.
+
+            Console.SetCursorPosition(printPassword + 69, 20);
+            Console.WriteLine("드디어...");
+
+            Thread.Sleep(2000);
+
+            Console.Clear();
 
             return;
         }

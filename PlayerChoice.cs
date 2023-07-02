@@ -27,7 +27,7 @@ namespace EscapeBuilding
         protected int playerMoved;
 
         //배터리 타이머 작동
-        protected Timer timer;
+        public static Timer timer;
 
         protected int flashNumber = 3;
 
@@ -65,10 +65,7 @@ namespace EscapeBuilding
                 Console.ReadLine();
 
                 Situation();
-
-
             }
-
 
             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
             Console.Write("손전등을 켜니 앞이 보이기 시작한다.");
@@ -80,7 +77,6 @@ namespace EscapeBuilding
             Console.Write("<진행: 'Enter'>");
 
             Console.ReadLine();
-
 
             Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
             Console.Write("무언가 이상하다...                 ");
@@ -308,6 +304,7 @@ namespace EscapeBuilding
 
                     if (playerHP < 300)
                     {
+                        Thread.Sleep(2000);
                         playerHP += 30;
                         Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                         Console.Write("체력이 30 회복되었다.                    ");
@@ -317,6 +314,8 @@ namespace EscapeBuilding
                     {
                         Console.SetCursorPosition(mapLeft + 1, mapTop + 2);
                         Console.Write("더이상 회복할 체력이 없다.                ");
+                        Console.SetCursorPosition(mapLeft + 1, mapTop + 3);
+                        Console.Write("                               ");
                     }
 
                     Console.SetCursorPosition(mapLeft + 1, mapTop + 19);
